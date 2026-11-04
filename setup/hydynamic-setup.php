@@ -738,6 +738,14 @@ upsert('page', 'contact', 'Contact', blocks([
     ['offerte', ['zijkant' => 'route', 'routefoto' => hyd_media('foto-bedrijfspand')]],
 ]), ['id' => $page_contact, 'metadesc' => 'Neem contact op met Hydynamic Holland BV, Marssteden 28 in Enschede. Bel +31(0)53-4282048 of mail naar info@hydynamic.nl.']);
 
+/* --- Offerte aanvragen (losse pagina met het offerteblok; ook terugval voor de offerteknoppen) */
+$page_offerte = upsert('page', 'offerte-aanvragen', 'Offerte aanvragen', blocks([
+    ['paginakop', ['variant' => 'tekst', 'titel' => 'Offerte aanvragen', 'accent' => 'aanvragen',
+        'intro' => '<p>Vraag vrijblijvend een offerte op maat aan voor hydrauliekslangen en koppelingen, centrale smering, industriële koppelingen of een gecertificeerde slangassemblage. Wij nemen zo snel mogelijk contact met u op.</p>']],
+    ['usp-balk', ['stijl' => 'donker', 'items' => $USP_HYDRAULIEK]],
+    $OFFERTE,
+]), ['metadesc' => 'Vraag vrijblijvend een offerte op maat aan bij Hydynamic Holland BV voor hydrauliekslangen, koppelingen, centrale smering en DNV-gecertificeerde slangassemblages.']);
+
 /* =========================================================================
  * 7. Menu's
  * ====================================================================== */
@@ -804,13 +812,14 @@ update_option('date_format', 'j F Y');
 
 if (function_exists('update_field')) {
     update_field('logo', hyd_media('logo-hydynamic'), 'option');
+    update_field('favicon', null, 'option'); // standaardicoon basisthema; favicon komt uit het thema (assets/functions/favicon.php)
     update_field('bedrijfsnaam', 'Hydynamic Holland BV', 'option');
     update_field('adres', 'Marssteden 28', 'option');
     update_field('postcode', '7547 TC Enschede (NL)', 'option');
     update_field('telefoon', '+31(0)53-4282048', 'option');
     update_field('email', 'info@hydynamic.nl', 'option');
     update_field('offerte_formulier', $form_id, 'option');
-    update_field('offerte_fallback', $page_contact, 'option');
+    update_field('offerte_fallback', $page_offerte, 'option');
     update_field('contactkaart_titel', 'Liever direct contact?', 'option');
     update_field('contactkaart_accent', 'contact?', 'option');
     update_field('alleen_thema_blokken', 1, 'option');

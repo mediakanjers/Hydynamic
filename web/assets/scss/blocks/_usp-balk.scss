@@ -3,26 +3,44 @@
 // =============================================================================
 
 .mk-usp {
+    // Mobiel/tablet: horizontale slider (swipen + automatisch doorschuiven via JS)
     &__list {
         @include reset-list;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 14px 32px;
+        display: flex;
+        gap: 24px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
 
-        @include mq(sm) {
-            grid-template-columns: repeat(2, 1fr);
+        &::-webkit-scrollbar {
+            display: none;
         }
 
         @include mq(lg) {
-            display: flex;
+            gap: 14px 32px;
+            overflow: visible;
             justify-content: space-between;
         }
     }
 
     &__item {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 14px;
+
+        @include mq(sm) {
+            flex-basis: calc(50% - 12px);
+            justify-content: flex-start;
+        }
+
+        @include mq(lg) {
+            flex: 0 1 auto;
+        }
         font-size: 16px;
         font-weight: 700;
         line-height: 1.25;

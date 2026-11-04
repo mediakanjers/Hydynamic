@@ -130,13 +130,12 @@ add_action('template_redirect', function () {
     if (!is_404()) return;
     $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
     $map  = [
-        'producten/hydrauliek'                  => '/producten/hydrauliek-slangen-en-koppelingen/',
+        'producten/hydrauliek'                  => '/producten/hydrauliekslangen-koppelingen/',
         'producten/onderdelen-centrale-smering' => '/producten/centrale-smering/',
         'producten/klantspecifiek'              => '/diensten/maatwerk-productie/',
         'vacature'                              => '/over-ons/',
-        'offerte-aanvragen'                     => '/contact/#offerte',
-        'aanvraag-verstuurd'                    => '/contact/',
-        'bedankt'                               => '/contact/',
+        'aanvraag-verstuurd'                    => '/offerte-aanvragen/',
+        'bedankt'                               => '/offerte-aanvragen/',
     ];
     // Oude informatiepagina's onder /producten/onderdelen-centrale-smering/... (live site)
     if (strpos($path, 'producten/onderdelen-centrale-smering/') === 0) {
@@ -146,4 +145,4 @@ add_action('template_redirect', function () {
         wp_safe_redirect(home_url($map[$path]), 301);
         exit;
     }
-});
+}, 1); // vóór WordPress' eigen URL-gok (redirect_canonical)

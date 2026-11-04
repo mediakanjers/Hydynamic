@@ -300,15 +300,120 @@
     /* ---------------------------------------------------------- FAQ */
     // Eén vraag tegelijk open (zoals een accordeon)
     function initFaq() {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var DURATION = 320;
+
+        function animate(item, open) {
+            var answer = item.querySelector('.mk-faq__answer');
+            if (!answer || reduce || !answer.animate) {
+                item.open = open;
+                return;
+            }
+            if (item._anim) item._anim.cancel();
+            clearTimeout(item._done);
+            item.classList.toggle('is-opening', open);
+            item.classList.toggle('is-closing', !open);
+            if (open) item.open = true;
+            var full = answer.scrollHeight;
+            var from = open ? 0 : answer.offsetHeight;
+            var to = open ? full : 0;
+            answer.style.overflow = 'hidden';
+            item._anim = answer.animate([
+                { height: from + 'px', opacity: open ? 0 : 1 },
+                { height: to + 'px', opacity: open ? 1 : 0 }
+            ], { duration: DURATION, easing: 'cubic-bezier(.4, 0, .2, 1)' });
+            var finish = function () {
+                clearTimeout(item._done);
+                if (item._anim) { item._anim.cancel(); item._anim = null; }
+                answer.style.overflow = '';
+                item.classList.remove('is-opening', 'is-closing');
+                if (!open) item.open = false;
+            };
+            item._anim.onfinish = finish;
+            item._done = setTimeout(finish, DURATION + 60); // vangnet als 'finish' niet afgaat
+        }
+
         document.querySelectorAll('.mk-faq__list').forEach(function (list) {
-            list.addEventListener('toggle', function (e) {
-                if (!e.target.open) return;
-                list.querySelectorAll('details[open]').forEach(function (d) { if (d !== e.target) d.open = false; });
-            }, true);
+            list.querySelectorAll('.mk-faq__item').forEach(function (item) {
+                var summary = item.querySelector('summary');
+                summary.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    var opening = !item.open || item.classList.contains('is-closing');
+                    // Eén vraag tegelijk open (accordeon)
+                    if (opening) {
+                        list.querySelectorAll('.mk-faq__item[open]').forEach(function (other) {
+                            if (other !== item && !other.classList.contains('is-closing')) animate(other, false);
+                        });
+                    }
+                    animate(item, opening);
+                });
+            });
         });
     }
 
+    /* ---------------------------------------------------------- USP-balk */
+    // Op mobiel/tablet een swipebare rij die automatisch doorschuift.
+    // Stopt bij aanraken/hover/focus en bij "verminderde beweging".
+    function initUsp() {
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.querySelectorAll('.mk-usp__list').forEach(function (list) {
+            if (list.children.length < 2) return;
+            var paused = false, timer;
+            ['pointerdown', 'mouseenter', 'focusin'].forEach(function (ev) {
+                list.addEventListener(ev, function () { paused = true; });
+            });
+            list.addEventListener('mouseleave', function () { paused = false; });
+            function tick() {
+                if (paused || reduce || lgQuery.matches || list.scrollWidth <= list.clientWidth + 2) return;
+                var item = list.children[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(list).columnGap) || 0);
+                var atEnd = list.scrollLeft + list.clientWidth >= list.scrollWidth - 4;
+                list.scrollTo({ left: atEnd ? 0 : list.scrollLeft + item });
+            }
+            timer = setInterval(tick, 3500);
+        });
+    }
+
+    /* ---------------------------------------------------- terug naar boven */
+    function initToTop() {
+        var btn = document.querySelector('.js-to-top');
+        if (!btn) return;
+        var onScroll = function () { btn.classList.toggle('is-visible', window.scrollY > 600); };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        btn.addEventListener('click', function () {
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+            var target = document.getElementById('main-content');
+            if (target) target.focus({ preventScroll: true });
+        });
+    }
+
+    /* -------------------------------------------- zwevende offerteknop */
+    // Zichtbaar na 300px scrollen; verdwijnt als het formulier in beeld is of het menu openstaat.
+    function initFloatOfferte() {
+        var btn = document.querySelector('.js-float-offerte');
+        if (!btn) return;
+        var form = document.getElementById('offerte');
+        var formVisible = false;
+        if (form && 'IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                formVisible = entries[0].isIntersecting;
+                update();
+            }, { threshold: 0.15 }).observe(form);
+        }
+        function update() {
+            var menuOpen = document.body.classList.contains('freeze');
+            btn.classList.toggle('is-visible', window.scrollY > 300 && !formVisible && !menuOpen);
+        }
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        document.addEventListener('click', function () { setTimeout(update, 0); });
+    }
+
     ready(function () {
+        initUsp();
+        initFloatOfferte();
+        initToTop();
         initMenu();
         initHeaderScroll();
         initSearch();

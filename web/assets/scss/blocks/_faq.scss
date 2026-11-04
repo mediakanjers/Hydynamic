@@ -37,7 +37,8 @@
         border-radius: $custom-radius-button;
         color: $color-secondary;
 
-        &[open] .mk-faq__icon {
+        // Pijl draait mee met het open- en dichtklappen
+        &[open]:not(.is-closing) .mk-faq__icon {
             transform: rotate(180deg);
         }
     }
@@ -92,7 +93,7 @@
     &__icon {
         flex: none;
         color: $color-primary;
-        transition: transform 0.2s ease;
+        transition: transform 0.32s cubic-bezier(.4, 0, .2, 1);
     }
 
     &__answer {

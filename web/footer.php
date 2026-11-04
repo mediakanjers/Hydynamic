@@ -10,6 +10,10 @@
 					</footer>
 			</div> <!-- #page_container -->
 
+			<?php echo hyd_button(__('Offerte aanvragen', 'mk'), hyd_offerte_url(), ['offerte' => true, 'icon' => 'file', 'class' => 'mk-float-offerte js-float-offerte']); ?>
+
+			<button type="button" class="mk-to-top js-to-top" aria-label="<?php esc_attr_e('Terug naar boven', 'mk'); ?>"><?php echo hyd_icon('chevron-up', 22); ?></button>
+
 			<!--  Notifications from core theme -->
 			<?php get_template_part('template-parts/notifications/notifications'); ?>
 

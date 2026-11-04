@@ -7,4 +7,5 @@
     require get_stylesheet_directory() . '/assets/functions/block-fields.php';
     require get_stylesheet_directory() . '/assets/functions/blogs-registrations.php';
     require get_stylesheet_directory() . '/assets/functions/options.php';
+    require get_stylesheet_directory() . '/assets/functions/favicon.php';
     add_theme_support('align-wide');
