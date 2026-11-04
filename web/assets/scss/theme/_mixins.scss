@@ -1,0 +1,94 @@
+// =============================================================================
+// Mixins & afgeleide variabelen
+// Alle waarden komen uit theme.json (via _theme-vars.scss). Mobile first:
+// gebruik altijd @include mq(md) { ... } om vanaf een breakpoint op te schalen.
+// =============================================================================
+
+$breakpoints: (
+    sm: $custom-breakpoint-sm,
+    md: $custom-breakpoint-md,
+    lg: $custom-breakpoint-lg,
+    xl: $custom-breakpoint-xl,
+    nav: 1320px, // vanaf hier staat het hoofdmenu inline in de balk
+);
+
+@mixin mq($bp) {
+    @media screen and (min-width: map-get($breakpoints, $bp)) {
+        @content;
+    }
+}
+
+@mixin mq-down($bp) {
+    @media screen and (max-width: calc(#{map-get($breakpoints, $bp)} - 1px)) {
+        @content;
+    }
+}
+
+// Compatibiliteit met de core-blokken (loop, kolommen, image-slider, breadcrumbs)
+$layout-maxwidth: calc(100% - (#{$custom-gutter} * 2));
+$layout-block-spacing: $spacing-l;
+
+// Standaard container: max 1240px + 24px zijmarge
+@mixin container($size: $layout-content-size) {
+    width: 100%;
+    max-width: calc(#{$size} + (#{$custom-gutter} * 2));
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $custom-gutter;
+    padding-right: $custom-gutter;
+}
+
+@mixin sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@mixin focus-ring($color: #7FC0FF) {
+    outline: 3px solid $color;
+    outline-offset: 2px;
+}
+
+@mixin reset-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// Typografie-presets uit de stijlgids
+@mixin text-h1 {
+    font-size: $h1-font-size;
+    font-weight: $h1-font-weight;
+    line-height: $h1-line-height;
+}
+
+@mixin text-h2 {
+    font-size: $h2-font-size;
+    font-weight: $h2-font-weight;
+    line-height: $h2-line-height;
+}
+
+@mixin text-h3 {
+    font-size: $h3-font-size;
+    font-weight: $h3-font-weight;
+    line-height: $h3-line-height;
+}
+
+@mixin text-body {
+    font-size: $font-size-normal;
+    line-height: $line-height-normal;
+}
+
+// Achtergrondverlopen uit het ontwerp
+$gradient-usp: radial-gradient(ellipse 60% 140% at 50% 0%, rgba(30, 110, 220, 0.55), rgba(30, 110, 220, 0) 70%), linear-gradient(90deg, $color-navy-dark, $color-navy 50%, $color-navy-dark);
+$gradient-blue: radial-gradient(ellipse 50% 70% at 100% 0%, rgba(20, 110, 220, 0.7), rgba(20, 110, 220, 0) 70%), linear-gradient(160deg, #03183F 0%, #072E66 45%, $color-navy-light 100%);
+$gradient-footer: radial-gradient(ellipse 60% 120% at 100% 0%, rgba(20, 110, 220, 0.6), rgba(20, 110, 220, 0) 70%), linear-gradient(90deg, #05193F 0%, #0A3A80 100%);
+$gradient-fade: linear-gradient(180deg, $color-bg-fade 0%, $color-white 70%);
+
+$transition: 0.2s ease;

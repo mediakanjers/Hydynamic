@@ -1,0 +1,161 @@
+// =============================================================================
+// Container, secties en achtergronden
+// =============================================================================
+
+.mk-container {
+    @include container;
+
+    &--narrow {
+        max-width: calc(900px + (#{$custom-gutter} * 2));
+    }
+
+    &--faq {
+        max-width: calc(940px + (#{$custom-gutter} * 2));
+    }
+}
+
+.mk-section {
+    position: relative;
+    padding-top: $spacing-section;
+    padding-bottom: $spacing-section;
+
+    &.mk-space--klein {
+        padding-top: $spacing-section-s;
+        padding-bottom: $spacing-section-s;
+    }
+
+    &.mk-space--groot {
+        padding-top: $spacing-section-l;
+        padding-bottom: $spacing-section-l;
+    }
+
+    &.mk-space--aansluitend {
+        padding-top: 0;
+    }
+
+    &__head {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 860px;
+        margin-bottom: clamp(28px, 3vw, 40px);
+    }
+
+    &__title {
+        @include text-h2;
+    }
+
+    &__intro {
+        font-size: $font-size-normal;
+        line-height: $line-height-normal;
+    }
+}
+
+// Achtergronden (gedeeld door alle blokken)
+.mk-bg--wit { background-color: $color-white; }
+.mk-bg--grijs,
+.mk-bg--pagina { background-color: $color-bg-page; }
+.mk-bg--licht { background-color: $color-bg-light; }
+.mk-bg--verloop { background: $gradient-fade; }
+.mk-bg--contact { background-color: $color-bg-contact; }
+.mk-bg--donker { background-color: $color-header; }
+.mk-bg--blauw { background: $gradient-blue; }
+
+.is-dark {
+    color: $color-white;
+
+    .mk-section__title,
+    h2,
+    h3 {
+        color: $color-white;
+    }
+
+    .accent {
+        color: $color-accent-light;
+    }
+
+    .mk-richtext {
+        line-height: 1.7;
+    }
+
+    .mk-richtext a {
+        color: $color-footer-link;
+    }
+}
+
+// Opeenvolgende secties met dezelfde achtergrond: geen dubbele witruimte
+.mk-bg--grijs + .mk-bg--grijs,
+.mk-bg--pagina + .mk-bg--grijs,
+.mk-bg--grijs + .mk-bg--pagina,
+.mk-bg--wit + .mk-bg--wit {
+    padding-top: 0;
+}
+
+// Kaarten
+.mk-card {
+    background: $color-white;
+    border-radius: $custom-radius-card;
+    box-shadow: $custom-shadow-card;
+}
+
+// Labelkop: "Downloads", "Kennisbank", "Veelgestelde vragen"
+.mk-label-head {
+    font-size: $font-size-label-head;
+    font-weight: $font-weight-label-head;
+    line-height: $line-height-label-head;
+}
+
+// Foto met afgeronde hoeken en schaduw
+.mk-photo {
+    position: relative;
+    overflow: hidden;
+    border-radius: $custom-radius-photo;
+    box-shadow: $custom-shadow-photo;
+    background: $color-photo;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &--empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 240px;
+        color: $color-white;
+        font-size: $font-size-small;
+    }
+}
+
+.mk-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: $color-primary;
+    vertical-align: middle;
+}
+
+.mk-icon-circle {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $color-bg-icon;
+    color: $color-primary;
+}
+
+.mk-block-empty {
+    padding: 24px;
+    margin: 0;
+    background: $color-bg-light;
+    border: 2px dashed $color-line;
+    color: $color-text-meta;
+    font-size: $font-size-small;
+    text-align: center;
+}

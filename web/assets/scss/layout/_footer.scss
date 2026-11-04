@@ -1,0 +1,109 @@
+// =============================================================================
+// Footer
+// =============================================================================
+
+.mk-footer {
+    background: $gradient-footer;
+    color: $color-white;
+    padding: clamp(48px, 5vw, 64px) 0 40px;
+    font-size: 16px;
+    line-height: 1.8;
+
+    @include mq(lg) {
+        font-size: 18px;
+    }
+
+    a {
+        color: $color-footer-link;
+        text-underline-offset: 3px;
+
+        &:hover {
+            color: $color-white;
+        }
+    }
+
+    &__inner {
+        @include container;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        align-items: center;
+
+        @include mq(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mq(lg) {
+            grid-template-columns: 1.1fr 1fr 1.1fr 1fr;
+            gap: 40px;
+        }
+    }
+
+    &__menu {
+        @include reset-list;
+
+        a {
+            color: $color-footer-link;
+        }
+    }
+
+    &__col--keurmerk img {
+        width: 110px;
+
+        @include mq(lg) {
+            width: 124px;
+        }
+    }
+
+    &__col--adres {
+        font-style: normal;
+
+        a {
+            color: $color-white;
+            text-decoration: none;
+        }
+    }
+
+    &__col--logo {
+        @include mq(sm) {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        img {
+            width: 180px;
+
+            @include mq(lg) {
+                width: 296px;
+            }
+        }
+    }
+
+    &__bottom {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px 40px;
+        margin-top: 40px;
+        font-size: 16px;
+
+        @include mq(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mq(lg) {
+            grid-template-columns: 1.1fr 1fr 1.1fr 1fr;
+            font-size: 18px;
+
+            p:last-child {
+                grid-column: 3 / span 2;
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+}

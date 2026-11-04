@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "mk/kennisbank",
+  "title": "Kennisbank",
+  "description": "De nieuwste kennisbank-artikelen als tegels.",
+  "category": "hydynamic",
+  "icon": "welcome-learn-more",
+  "keywords": [
+    "hydynamic",
+    "sectie"
+  ],
+  "acf": {
+    "blockVersion": 3,
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "hideFieldsInSidebar": true
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "html": false,
+    "customClassName": true,
+    "multiple": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {}
+    }
+  }
+}

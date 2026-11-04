@@ -1,0 +1,14 @@
+.social-container {
+    .socials {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        height: fit-content;
+        a {
+            display: flex;
+            svg {
+                width: 40px;
+            }
+        }
+    }
+}

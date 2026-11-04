@@ -1,0 +1,119 @@
+// =============================================================================
+// Knoppen en tekstlinks
+// =============================================================================
+
+.mk-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: $custom-button-height;
+    padding: 0 22px;
+    border: 0;
+    border-radius: $custom-radius-button;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color $transition, color $transition, box-shadow $transition;
+
+    .mk-icon {
+        flex: none;
+        transition: transform $transition;
+    }
+
+    &:hover .mk-icon--arrow-right {
+        transform: translateX(3px);
+    }
+
+    &:focus-visible {
+        @include focus-ring;
+    }
+
+    &--primary {
+        background-color: $color-primary;
+        color: $color-white;
+
+        &:hover {
+            background-color: $color-primary-hover;
+            color: $color-white;
+        }
+    }
+
+    &--outline {
+        background: transparent;
+        color: $color-primary;
+        box-shadow: inset 0 0 0 2px $color-primary;
+
+        &:hover {
+            background: $color-primary;
+            color: $color-white;
+        }
+    }
+
+    &--outline-white {
+        background: transparent;
+        color: $color-white;
+        box-shadow: inset 0 0 0 2px $color-white;
+
+        &:hover {
+            background: $color-white;
+            color: $color-navy;
+        }
+    }
+
+    &--white {
+        background: $color-white;
+        color: $color-navy;
+
+        &:hover {
+            background: #E3EEFB;
+            color: $color-navy;
+        }
+    }
+
+    &--small {
+        min-height: $custom-button-height-small;
+        padding: 0 20px;
+        font-size: 15px;
+    }
+
+    &--block {
+        width: 100%;
+    }
+}
+
+// Op donkere secties: primaire knop blijft blauw, outline wordt wit
+.is-dark .mk-button--outline {
+    color: $color-white;
+    box-shadow: inset 0 0 0 2px $color-white;
+}
+
+// Tekstlink met pijl ("Bekijk producten →", "Lees meer →")
+.mk-textlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-primary;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+
+    .mk-icon {
+        flex: none;
+        transition: transform $transition;
+    }
+
+    &:hover {
+        color: $color-primary-hover;
+
+        .mk-icon {
+            transform: translateX(3px);
+        }
+    }
+}

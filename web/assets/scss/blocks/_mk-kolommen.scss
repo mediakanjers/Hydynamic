@@ -1,0 +1,162 @@
+.mk-kolommen-outer {
+    background-color: var(--mk-kolommen-bg-breed, transparent);
+
+    &:not(:last-child) {
+        margin-bottom: $layout-block-spacing;
+    }
+
+    &--breed {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+    }
+
+    &[data-padding="klein"]   { padding-top: 20px; padding-bottom: 20px; }
+    &[data-padding="normaal"] { padding-top: 40px; padding-bottom: 40px; }
+    &[data-padding="groot"]   { padding-top: 64px; padding-bottom: 64px; }
+}
+
+.mk-kolommen {
+    max-width: $layout-content-size;
+    width: $layout-maxwidth;
+    margin: 0 auto;
+    display: grid;
+    gap: 30px;
+    align-items: start;
+    background-color: var(--mk-kolommen-bg-grid, transparent);
+    color: var(--mk-kolommen-color, inherit);
+
+    &[data-verhouding="100"]         { grid-template-columns: 1fr; }
+    &[data-verhouding="50-50"]       { grid-template-columns: 1fr 1fr; }
+    &[data-verhouding="66-33"]       { grid-template-columns: 2fr 1fr; }
+    &[data-verhouding="33-66"]       { grid-template-columns: 1fr 2fr; }
+    &[data-verhouding="25-75"]       { grid-template-columns: 1fr 3fr; }
+    &[data-verhouding="75-25"]       { grid-template-columns: 3fr 1fr; }
+    &[data-verhouding="33-33-33"]    { grid-template-columns: repeat(3, 1fr); }
+    &[data-verhouding="25-50-25"]    { grid-template-columns: 1fr 2fr 1fr; }
+    &[data-verhouding="25-25-25-25"] { grid-template-columns: repeat(4, 1fr); }
+
+    &[data-uitlijning="boven"]     { align-items: start; }
+    &[data-uitlijning="midden"]    { align-items: center; }
+    &[data-uitlijning="onder"]     { align-items: end; }
+    &[data-uitlijning="uitgerekt"] { align-items: stretch; }
+
+    &[data-padding="klein"]   { padding: 20px; }
+    &[data-padding="normaal"] { padding: 40px; }
+    &[data-padding="groot"]   { padding: 64px; }
+
+    &--rounded {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr !important;
+    }
+
+    &__kolom {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        &[data-padding="klein"]   { padding: 20px; }
+        &[data-padding="normaal"] { padding: 40px; }
+        &[data-padding="groot"]   { padding: 64px; }
+
+        &[data-content-uitlijning="midden"] { justify-content: center; }
+        &[data-content-uitlijning="onder"]  { justify-content: flex-end; }
+    }
+
+    &__kolom--card {
+        background-color: var(--mk-kolom-bg, transparent);
+        color: var(--mk-kolom-color, inherit);
+    }
+
+    &__kolom--rounded {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    &__titel {
+        color: inherit;
+        margin: 0;
+    }
+
+    &__tekst {
+        font-size: $font-size-normal;
+        line-height: $line-height-normal;
+        color: inherit;
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__afbeelding {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    &__kolom--rounded &__afbeelding {
+        border-radius: inherit;
+    }
+
+    &__video {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 8px;
+        overflow: hidden;
+
+        iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    }
+
+    &__icoon-tekst {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__icoon {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    &__cijfer {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__cijfer-waarde {
+        font-size: $h3-font-size;
+        font-weight: $h3-font-weight;
+        line-height: $h3-line-height;
+        color: var(--mk-kolom-color, #{$color-primary});
+    }
+
+    &__cijfer-label {
+        font-size: $font-size-small;
+        color: inherit;
+    }
+
+    // Meerdere content-types binnen één kolom krijgen wat ruimte t.o.v. elkaar.
+    &__kolom > * + * {
+        margin-top: 16px;
+    }
+}

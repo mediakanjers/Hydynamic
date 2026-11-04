@@ -1,0 +1,411 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": false,
+    "color": {
+      "custom": false,
+      "customGradient": false,
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "palette": [
+        {
+          "name": "Primair blauw",
+          "slug": "primary",
+          "color": "#1F6FC4"
+        },
+        {
+          "name": "Primair blauw hover",
+          "slug": "primary-hover",
+          "color": "#164F8C"
+        },
+        {
+          "name": "Donkerblauw (tekst)",
+          "slug": "secondary",
+          "color": "#1C1D2B"
+        },
+        {
+          "name": "Header",
+          "slug": "header",
+          "color": "#1A1B29"
+        },
+        {
+          "name": "Accentblauw",
+          "slug": "accent",
+          "color": "#2D8CEB"
+        },
+        {
+          "name": "Licht accent",
+          "slug": "accent-light",
+          "color": "#5AA8F0"
+        },
+        {
+          "name": "Vinkje USP",
+          "slug": "check",
+          "color": "#3FA2F0"
+        },
+        {
+          "name": "Footerlink",
+          "slug": "footer-link",
+          "color": "#8CC4FF"
+        },
+        {
+          "name": "Fotovlak",
+          "slug": "photo",
+          "color": "#2A2D3E"
+        },
+        {
+          "name": "Achtergrond pagina",
+          "slug": "bg-page",
+          "color": "#E9EDF2"
+        },
+        {
+          "name": "Achtergrond grijs",
+          "slug": "bg-grey",
+          "color": "#EEF1F4"
+        },
+        {
+          "name": "Achtergrond licht",
+          "slug": "bg-light",
+          "color": "#F7F8FA"
+        },
+        {
+          "name": "Achtergrond verloop start",
+          "slug": "bg-fade",
+          "color": "#F1F3F6"
+        },
+        {
+          "name": "Contactvlak",
+          "slug": "bg-contact",
+          "color": "#E1E6F4"
+        },
+        {
+          "name": "Icoonvlak",
+          "slug": "bg-icon",
+          "color": "#E3EEFB"
+        },
+        {
+          "name": "Notitievlak",
+          "slug": "bg-note",
+          "color": "#D3DAEC"
+        },
+        {
+          "name": "Scheidingslijn",
+          "slug": "line",
+          "color": "#E3E6EE"
+        },
+        {
+          "name": "Secundaire tekst",
+          "slug": "text-secondary",
+          "color": "#3A3D52"
+        },
+        {
+          "name": "Meta-tekst",
+          "slug": "text-meta",
+          "color": "#555869"
+        },
+        {
+          "name": "Navy donker",
+          "slug": "navy-dark",
+          "color": "#04163A"
+        },
+        {
+          "name": "Navy",
+          "slug": "navy",
+          "color": "#0A2E6A"
+        },
+        {
+          "name": "Blauw diep",
+          "slug": "navy-light",
+          "color": "#0A4A9C"
+        },
+        {
+          "name": "PDF-rood",
+          "slug": "pdf",
+          "color": "#C8102E"
+        },
+        {
+          "name": "Groen",
+          "slug": "green",
+          "color": "#2E7A1F"
+        },
+        {
+          "name": "Groen status",
+          "slug": "green-dot",
+          "color": "#2DB51F"
+        },
+        {
+          "name": "Foutmelding",
+          "slug": "error",
+          "color": "#B3261E"
+        },
+        {
+          "name": "Wit",
+          "slug": "white",
+          "color": "#FFFFFF"
+        }
+      ]
+    },
+    "typography": {
+      "customFontSize": false,
+      "defaultFontSizes": false,
+      "fluid": false,
+      "fontFamilies": [
+        {
+          "name": "Manrope",
+          "slug": "standard-font",
+          "fontFamily": "'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Manrope",
+              "fontWeight": "400 800",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": [
+                "file:./assets/fonts/manrope-latin.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "Label",
+          "slug": "label",
+          "size": "11px",
+          "lineHeight": "1.2",
+          "fontWeight": 800
+        },
+        {
+          "name": "Meta",
+          "slug": "meta",
+          "size": "13px",
+          "lineHeight": "1.4",
+          "fontWeight": 400,
+          "fontColor": "#555869"
+        },
+        {
+          "name": "Klein",
+          "slug": "small",
+          "size": "14px",
+          "lineHeight": "1.5",
+          "fontWeight": 400,
+          "fontColor": "#1C1D2B"
+        },
+        {
+          "name": "Tegeltekst",
+          "slug": "tile",
+          "size": "15px",
+          "lineHeight": "1.5",
+          "fontWeight": 400,
+          "fontColor": "#3A3D52"
+        },
+        {
+          "name": "FAQ-antwoord",
+          "slug": "medium",
+          "size": "16px",
+          "lineHeight": "1.6",
+          "fontWeight": 400,
+          "fontColor": "#1C1D2B"
+        },
+        {
+          "name": "Bodytekst",
+          "slug": "normal",
+          "size": "17px",
+          "lineHeight": "1.6",
+          "fontWeight": 400,
+          "fontColor": "#1C1D2B"
+        },
+        {
+          "name": "Intro",
+          "slug": "intro",
+          "size": "18px",
+          "lineHeight": "1.6",
+          "fontWeight": 400,
+          "fontColor": "#1C1D2B"
+        },
+        {
+          "name": "Tegeltitel (H3)",
+          "slug": "large",
+          "size": "18px",
+          "lineHeight": "1.35",
+          "fontWeight": 600
+        },
+        {
+          "name": "Kaarttitel",
+          "slug": "card",
+          "size": "clamp(19px, 1.1rem + 0.4vw, 22px)",
+          "lineHeight": "1.35",
+          "fontWeight": 600
+        },
+        {
+          "name": "Labelkop",
+          "slug": "label-head",
+          "size": "clamp(24px, 1.2rem + 0.9vw, 29px)",
+          "lineHeight": "1.25",
+          "fontWeight": 700
+        },
+        {
+          "name": "Sectietitel (H2)",
+          "slug": "extra-large",
+          "size": "clamp(27px, 1.25rem + 1.5vw, 36px)",
+          "lineHeight": "1.2",
+          "fontWeight": 600
+        },
+        {
+          "name": "Paginatitel (H1)",
+          "slug": "huge",
+          "size": "clamp(31px, 1.25rem + 2.3vw, 44px)",
+          "lineHeight": "1.15",
+          "fontWeight": 700
+        }
+      ]
+    },
+    "spacing": {
+      "units": [
+        "px",
+        "em",
+        "rem",
+        "%",
+        "vw"
+      ],
+      "spacingSizes": [
+        {
+          "name": "XS",
+          "slug": "xs",
+          "size": "8px"
+        },
+        {
+          "name": "S",
+          "slug": "s",
+          "size": "16px"
+        },
+        {
+          "name": "M",
+          "slug": "m",
+          "size": "24px"
+        },
+        {
+          "name": "L",
+          "slug": "l",
+          "size": "40px"
+        },
+        {
+          "name": "Sectie klein",
+          "slug": "section-s",
+          "size": "clamp(48px, 6vw, 80px)"
+        },
+        {
+          "name": "Sectie",
+          "slug": "section",
+          "size": "clamp(56px, 7vw, 96px)"
+        },
+        {
+          "name": "Sectie groot",
+          "slug": "section-l",
+          "size": "clamp(64px, 8vw, 112px)"
+        }
+      ]
+    },
+    "layout": {
+      "contentSize": "1620px",
+      "wideSize": "1920px"
+    },
+    "custom": {
+      "gutter": "max(20px, calc(8vw - 8px))",
+      "radius": {
+        "button": "4px",
+        "field": "6px",
+        "card": "8px",
+        "tile": "12px",
+        "photo": "10px"
+      },
+      "shadow": {
+        "card": "0 4px 14px rgba(28, 29, 43, 0.10)",
+        "article": "0 2px 10px rgba(28, 29, 43, 0.12)",
+        "photo": "0 8px 24px rgba(28, 29, 43, 0.18)",
+        "hover": "0 12px 28px rgba(28, 29, 43, 0.16)"
+      },
+      "header": {
+        "height": "clamp(72px, 5.2vw, 100px)",
+        "height-mobile": "64px"
+      },
+      "button": {
+        "height": "52px",
+        "height-small": "44px"
+      },
+      "breakpoint": {
+        "sm": "600px",
+        "md": "900px",
+        "lg": "1200px",
+        "xl": "1440px"
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#FFFFFF",
+      "text": "#1C1D2B"
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--standard-font)",
+      "fontSize": "17px",
+      "lineHeight": "1.6"
+    },
+    "elements": {
+      "h1": {
+        "typography": {
+          "fontSize": "clamp(31px, 1.25rem + 2.3vw, 44px)",
+          "fontWeight": "700",
+          "lineHeight": "1.15",
+          "color": "#1C1D2B"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "clamp(27px, 1.25rem + 1.5vw, 36px)",
+          "fontWeight": "600",
+          "lineHeight": "1.2",
+          "color": "#1C1D2B"
+        }
+      },
+      "h3": {
+        "typography": {
+          "fontSize": "18px",
+          "fontWeight": "600",
+          "lineHeight": "1.35",
+          "color": "#1C1D2B"
+        }
+      },
+      "h4": {
+        "typography": {
+          "fontSize": "18px",
+          "fontWeight": "700",
+          "lineHeight": "1.35",
+          "color": "#1C1D2B"
+        }
+      },
+      "h5": {
+        "typography": {
+          "fontSize": "17px",
+          "fontWeight": "700",
+          "lineHeight": "1.4",
+          "color": "#1C1D2B"
+        }
+      },
+      "h6": {
+        "typography": {
+          "fontSize": "15px",
+          "fontWeight": "700",
+          "lineHeight": "1.4",
+          "color": "#1C1D2B"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "#1F6FC4"
+        }
+      }
+    }
+  }
+}

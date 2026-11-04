@@ -1,0 +1,316 @@
+// =============================================================================
+// Hoofdmenu
+// - Mobiel/tablet (< lg): uitklappaneel van rechts met accordeon-submenu's
+// - Desktop (>= lg): items in de balk, dropdown + sub-submenu naar rechts
+// =============================================================================
+
+.mk-nav {
+    &__list,
+    &__sub {
+        @include reset-list;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: inherit;
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+    }
+
+    &__toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: none;
+        border: 0;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        padding: 0;
+
+        .mk-icon {
+            transition: transform 0.2s ease;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+    }
+
+    &__mobile-extra {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px $custom-gutter 32px;
+    }
+
+    &__phone {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: $color-white;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    // ---------------------------------------------------------------- mobiel
+    @include mq-down(nav) {
+        position: fixed;
+        top: $custom-header-height-mobile;
+        right: 0;
+        bottom: 0;
+        z-index: 899;
+        width: min(420px, 100%);
+        background: $color-header;
+        color: $color-white;
+        transform: translateX(100%);
+        visibility: hidden;
+        transition: transform 0.3s ease, visibility 0s linear 0.3s;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+        .admin-bar & {
+            top: calc(#{$custom-header-height-mobile} + 46px);
+
+            @media screen and (min-width: 783px) {
+                top: calc(#{$custom-header-height-mobile} + 32px);
+            }
+        }
+
+        &.is-open {
+            transform: translateX(0);
+            visibility: visible;
+            transition: transform 0.3s ease, visibility 0s;
+        }
+
+        &__item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        &__row {
+            justify-content: space-between;
+        }
+
+        &__link {
+            flex: 1;
+            padding: 16px $custom-gutter;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        &__toggle {
+            width: 56px;
+            height: 56px;
+            border-left: 1px solid rgba(255, 255, 255, 0.12);
+
+            .mk-icon--chevron-right {
+                transform: rotate(90deg);
+            }
+        }
+
+        .is-open > &__row &__toggle .mk-icon {
+            transform: rotate(180deg);
+        }
+
+        .is-open > &__row &__toggle .mk-icon--chevron-right {
+            transform: rotate(270deg);
+        }
+
+        &__sub {
+            display: none;
+            background: rgba(255, 255, 255, 0.04);
+
+            .mk-nav__item {
+                border-bottom: 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .mk-nav__link {
+                font-size: 16px;
+                font-weight: 500;
+                padding-left: calc(#{$custom-gutter} + 16px);
+            }
+
+            .mk-nav__sub .mk-nav__link {
+                padding-left: calc(#{$custom-gutter} + 32px);
+                font-weight: 400;
+                color: #C9CEDC;
+            }
+        }
+
+        .is-open > &__sub {
+            display: block;
+        }
+
+        .is-current > &__row > &__link,
+        .is-ancestor > &__row > &__link {
+            color: $color-accent-light;
+        }
+    }
+
+    // --------------------------------------------------------------- desktop
+    @include mq(nav) {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: flex-end;
+
+        &__panel {
+            display: flex;
+            align-items: center;
+        }
+
+        &__mobile-extra {
+            display: none;
+        }
+
+        &__list {
+            display: flex;
+            align-items: center;
+            gap: clamp(12px, 1.25vw, 32px);
+        }
+
+        &__item {
+            position: relative;
+        }
+
+        &__item--level-0 > &__row {
+            gap: 4px;
+            min-height: $custom-header-height;
+        }
+
+        &__item--level-0 > &__row > &__link {
+            font-size: clamp(14px, 0.4rem + 0.6vw, 17px);
+            font-weight: 600;
+            white-space: nowrap;
+            color: $color-white;
+            transition: color $transition;
+        }
+
+        &__item--level-0:hover > &__row > &__link,
+        &__item--level-0.is-open > &__row > &__link,
+        &__item--level-0.is-current > &__row > &__link,
+        &__item--level-0.is-ancestor > &__row > &__link {
+            color: $color-accent;
+        }
+
+        &__item--level-0 > &__row > &__toggle {
+            width: 20px;
+            height: 24px;
+            color: $color-white;
+        }
+
+        &__item--level-0:hover > &__row > &__toggle,
+        &__item--level-0.is-open > &__row > &__toggle {
+            color: $color-accent;
+
+            .mk-icon {
+                transform: rotate(180deg);
+            }
+        }
+
+        // Dropdown (niveau 1)
+        &__sub {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 10;
+            min-width: 290px;
+            padding: 0;
+            background: $color-white;
+            color: $color-secondary;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(6px);
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+        }
+
+        &__item:hover > &__sub,
+        &__item:focus-within > &__sub,
+        &__item.is-open > &__sub {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s;
+        }
+
+        &__sub &__item {
+            position: relative;
+        }
+
+        &__sub &__row {
+            justify-content: space-between;
+            transition: background-color $transition;
+        }
+
+        &__sub &__link {
+            flex: 1;
+            padding: 14px 20px;
+            font-size: 15px;
+            line-height: 1.35;
+            color: $color-secondary;
+        }
+
+        &__sub &__toggle {
+            width: 40px;
+            align-self: stretch;
+            color: $color-secondary;
+        }
+
+        &__sub &__item:hover > &__row,
+        &__sub &__item.is-open > &__row,
+        &__sub &__item:focus-within > &__row {
+            background: #EEF3FA;
+
+            > .mk-nav__link,
+            > .mk-nav__toggle {
+                color: $color-primary;
+            }
+        }
+
+        &__sub .is-current > &__row > &__link {
+            color: $color-primary;
+            font-weight: 600;
+        }
+
+        // Sub-submenu (niveau 2): naar rechts, met blauwe rand links
+        &__sub &__sub {
+            top: 0;
+            left: 100%;
+            min-width: 258px;
+            border-left: 3px solid $color-primary;
+            transform: translateX(6px);
+        }
+
+        &__sub &__item:hover > &__sub,
+        &__sub &__item:focus-within > &__sub,
+        &__sub &__item.is-open > &__sub {
+            transform: translateX(0);
+        }
+
+        // Laatste items: dropdown rechts uitlijnen zodat hij niet buiten beeld valt
+        &__list > &__item:nth-last-child(-n+3) > &__sub {
+            left: auto;
+            right: 0;
+        }
+    }
+}
+
+.mk-nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 898;
+    background: rgba(10, 12, 24, 0.55);
+
+    @include mq(nav) {
+        display: none !important;
+    }
+}

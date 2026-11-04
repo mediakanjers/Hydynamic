@@ -1,0 +1,143 @@
+// =============================================================================
+// Blok: Homepage hero (live site): foto, H1 en vier glazen tegels
+// =============================================================================
+
+.mk-home-hero {
+    position: relative;
+    overflow: hidden;
+    background: $color-header;
+    color: $color-white;
+    padding: 48px 0 56px;
+
+    @include mq(lg) {
+        padding: calc(#{$custom-header-height} + 40px) 0 clamp(80px, 8vw, 150px);
+    }
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(26, 27, 41, 0.45) 0%, rgba(26, 27, 41, 0.15) 45%, rgba(26, 27, 41, 0.35) 100%);
+        }
+    }
+
+    .mk-container {
+        position: relative;
+    }
+
+    &__title {
+        @include text-h1;
+        font-size: clamp(30px, 1rem + 2.8vw, 52px);
+        text-align: center;
+        text-shadow: 0 3px 12px rgba(0, 0, 0, 0.55);
+        margin: 0 auto clamp(28px, 3.5vw, 56px);
+        max-width: 1240px;
+    }
+
+    &__tiles {
+        @include reset-list;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+
+        @include mq(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mq(lg) {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 1504px;
+            margin: 0 auto;
+        }
+    }
+}
+
+.mk-home-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 28px 26px 32px;
+    background: rgba(240, 240, 240, 0.9);
+    backdrop-filter: blur(6px);
+    color: $color-secondary;
+    transition: background-color $transition, transform $transition;
+
+    @include mq(lg) {
+        padding: 46px 30px 52px;
+        min-height: 368px;
+    }
+
+    &:hover,
+    &:focus-within {
+        background: rgba(255, 255, 255, 0.97);
+        transform: translateY(-3px);
+    }
+
+    &__icon img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 12px;
+        font-size: clamp(22px, 1rem + 0.8vw, 28px);
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    &__link {
+        color: inherit;
+        text-decoration: none;
+
+        // Hele tegel klikbaar
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+        &:focus-visible {
+            outline: none;
+
+            &::after {
+                @include focus-ring($color-primary);
+            }
+        }
+    }
+
+    &__arrow {
+        flex: none;
+        transition: transform $transition;
+    }
+
+    &:hover &__arrow {
+        transform: translateX(4px);
+    }
+
+    &__text {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #3A3C4E;
+
+        @include mq(lg) {
+            font-size: 17px;
+        }
+    }
+}

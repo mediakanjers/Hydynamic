@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "mk/tegels",
+  "title": "Klikbare tegels",
+  "description": "Tegels met foto, titel, eigen tegeltekst en doellink.",
+  "category": "hydynamic",
+  "icon": "grid-view",
+  "keywords": [
+    "hydynamic",
+    "sectie"
+  ],
+  "acf": {
+    "blockVersion": 3,
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "hideFieldsInSidebar": true
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "html": false,
+    "customClassName": true,
+    "multiple": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {}
+    }
+  }
+}

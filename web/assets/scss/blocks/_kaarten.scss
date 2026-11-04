@@ -1,0 +1,54 @@
+// =============================================================================
+// Blok: Tekstkaarten
+// =============================================================================
+
+.mk-kaarten {
+    &__grid {
+        @include reset-list;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+
+        @include mq(md) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(20px, 2vw, 38px);
+        }
+
+        @include mq(lg) {
+            &--3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    }
+}
+
+.mk-kaart {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px 24px;
+    border-radius: $custom-radius-card;
+    box-shadow: 0 2px 12px rgba(28, 29, 43, 0.08);
+    color: $color-secondary;
+
+    @include mq(lg) {
+        padding: 44px 46px 52px;
+    }
+
+    &__title {
+        font-size: clamp(18px, 1rem + 0.25vw, 20px);
+        font-weight: 600;
+        line-height: 1.35;
+        color: $color-secondary;
+    }
+
+    &__text {
+        font-size: 16px;
+        line-height: 1.65;
+        color: $color-text-secondary;
+    }
+}
+
+.is-dark .mk-kaart__title {
+    color: $color-secondary;
+}

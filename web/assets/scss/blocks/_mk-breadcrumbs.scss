@@ -1,0 +1,35 @@
+.mk-breadcrumbs {
+    max-width: $layout-content-size;
+    width: $layout-maxwidth;
+    margin: 0 auto;
+
+    &:not(:last-child) {
+        margin-bottom: $layout-block-spacing;
+    }
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: $font-size-small;
+    color: $font-color-normal;
+
+    a {
+        color: $color-primary;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    strong,
+    span:not(.mk-breadcrumbs-sep) {
+        font-weight: 600;
+        color: $font-color-normal;
+    }
+
+    &-sep {
+        color: $font-color-normal;
+        opacity: 0.4;
+    }
+}

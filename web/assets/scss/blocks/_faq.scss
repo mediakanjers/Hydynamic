@@ -1,0 +1,113 @@
+// =============================================================================
+// Blok: Veelgestelde vragen
+// =============================================================================
+
+.mk-faq {
+    overflow: hidden;
+
+    &__lines {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: max(1900px, 120%);
+        max-width: none;
+        height: auto;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0.85;
+    }
+
+    .mk-container {
+        position: relative;
+    }
+
+    &__title {
+        text-align: center;
+        margin-bottom: clamp(28px, 3vw, 54px);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    &__item {
+        background: $color-white;
+        border-radius: $custom-radius-button;
+        color: $color-secondary;
+
+        &[open] .mk-faq__icon {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__question {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        min-height: 72px;
+        padding: 16px 20px;
+        cursor: pointer;
+        list-style: none;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.35;
+
+        @include mq(md) {
+            min-height: 86px;
+            padding: 18px 30px;
+            gap: 24px;
+            font-size: 20px;
+        }
+
+        &::-webkit-details-marker {
+            display: none;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+            border-radius: $custom-radius-button;
+        }
+    }
+
+    &__nr {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid $color-primary;
+        border-radius: 50%;
+        color: $color-primary;
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+    &__q {
+        flex: 1;
+    }
+
+    &__icon {
+        flex: none;
+        color: $color-primary;
+        transition: transform 0.2s ease;
+    }
+
+    &__answer {
+        padding: 0 20px 24px calc(20px + 34px + 18px);
+        font-size: $font-size-medium;
+        line-height: $line-height-medium;
+
+        @include mq(md) {
+            padding: 0 70px 28px calc(30px + 34px + 24px);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+}

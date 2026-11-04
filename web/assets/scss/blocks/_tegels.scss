@@ -1,0 +1,130 @@
+// =============================================================================
+// Blok: Klikbare tegels
+// Mobiel: horizontaal swipebare rij. Vanaf sm: raster.
+// =============================================================================
+
+.mk-tegels {
+    &__grid {
+        @include reset-list;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(260px, 80%);
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        margin: 0 calc(#{$custom-gutter} * -1);
+        padding: 4px $custom-gutter 20px;
+        scrollbar-width: thin;
+
+        > * {
+            scroll-snap-align: start;
+        }
+
+        @include mq(sm) {
+            grid-auto-flow: row;
+            grid-template-columns: repeat(2, 1fr);
+            overflow: visible;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
+
+        @include mq(lg) {
+            gap: clamp(20px, 2vw, 38px);
+
+            &--3 { grid-template-columns: repeat(3, 1fr); }
+            &--4 { grid-template-columns: repeat(4, 1fr); }
+        }
+    }
+}
+
+.mk-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: $color-white;
+    border-radius: $custom-radius-card;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(28, 29, 43, 0.08);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+    &.is-linked:hover,
+    &.is-linked:focus-within {
+        box-shadow: $custom-shadow-hover;
+        transform: translateY(-2px);
+    }
+
+    &__image {
+        aspect-ratio: 376 / 268;
+        background: $color-photo;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+    }
+
+    &.is-linked:hover &__image img {
+        transform: scale(1.03);
+    }
+
+    &__body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 24px 24px 28px;
+
+        @include mq(xl) {
+            padding: 28px 34px 36px;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-large;
+        font-weight: $font-weight-large;
+        line-height: $line-height-large;
+        color: $color-secondary;
+    }
+
+    &__link {
+        color: inherit;
+        text-decoration: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        &:focus-visible {
+            outline: none;
+
+            &::after {
+                @include focus-ring($color-primary);
+                outline-offset: -3px;
+                border-radius: $custom-radius-card;
+            }
+        }
+    }
+
+    &__text {
+        font-size: 16px;
+        line-height: 1.6;
+        color: $color-text-secondary;
+    }
+
+    &__more {
+        margin-top: auto;
+        padding-top: 18px;
+    }
+}
+
+// Op een blauwe achtergrond (oplossingspagina)
+.is-dark .mk-tile__title {
+    color: $color-secondary;
+}

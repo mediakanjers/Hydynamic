@@ -1,0 +1,43 @@
+/* ===== THEME (tokens uit theme.json) ===== */
+@import "theme/theme-vars";
+@import "theme/mixins";
+@import "theme/theme";
+
+/* ===== LAYOUT ===== */
+@import "layout/section";
+@import "layout/guttenberg";
+@import "layout/header";
+@import "layout/footer";
+
+/* ===== TEMPLATE PARTS ===== */
+@import "template-parts/404";
+
+/* ===== COMPONENTS ===== */
+@import "components/button";
+@import "components/breadcrumbs";
+@import "components/menu/header-menu";
+@import "components/menu/footer-menu";
+@import "components/search";
+@import "components/slider";
+@import "components/contact/contact-info";
+@import "components/contact/socials";
+@import "components/form/form";
+
+/* ===== HYDYNAMIC BLOKKEN ===== */
+@import "blocks/paginakop";
+@import "blocks/home-hero";
+@import "blocks/usp-balk";
+@import "blocks/tegels";
+@import "blocks/downloads";
+@import "blocks/tekst-afbeelding";
+@import "blocks/kaarten";
+@import "blocks/faq";
+@import "blocks/kennisbank";
+@import "blocks/offerte";
+@import "blocks/logos-contact";
+
+/* ===== CORE BLOKKEN (mkbase) ===== */
+@import "blocks/mk-loop";
+@import "blocks/image-slider";
+@import "blocks/mk-breadcrumbs";
+@import "blocks/mk-kolommen";

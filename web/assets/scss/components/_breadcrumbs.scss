@@ -1,0 +1,62 @@
+// =============================================================================
+// Kruimelpad
+// =============================================================================
+
+.mk-crumbs {
+    position: relative;
+    z-index: 1;
+    font-size: $font-size-small;
+    line-height: 1.4;
+    color: $color-secondary;
+
+    &__list {
+        @include reset-list;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    &__item {
+        display: inline-flex;
+        align-items: center;
+
+        &:not(:last-child)::after {
+            content: "›";
+            margin: 0 6px;
+        }
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-primary;
+            text-decoration: underline;
+        }
+    }
+
+    strong {
+        font-weight: 700;
+    }
+
+    // Op mobiel alleen de laatste twee niveaus tonen om ruimte te sparen
+    @include mq-down(sm) {
+        &__item:not(:nth-last-child(-n+2)) {
+            display: none;
+        }
+
+        &__item:nth-last-child(2)::before {
+            content: "‹";
+            margin-right: 6px;
+        }
+
+        &__item:nth-last-child(2)::after {
+            display: none;
+        }
+
+        &__item:last-child {
+            display: none;
+        }
+    }
+}

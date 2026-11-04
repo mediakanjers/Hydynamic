@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "mk/offerte",
+  "title": "Offerteformulier",
+  "description": "Gravity Forms offerteformulier (doel van alle \"Offerte aanvragen\"-knoppen).",
+  "category": "hydynamic",
+  "icon": "feedback",
+  "keywords": [
+    "hydynamic",
+    "sectie"
+  ],
+  "acf": {
+    "blockVersion": 3,
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "hideFieldsInSidebar": true
+  },
+  "supports": {
+    "align": false,
+    "anchor": false,
+    "html": false,
+    "customClassName": true,
+    "multiple": false
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {}
+    }
+  }
+}

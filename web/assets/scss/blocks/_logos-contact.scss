@@ -1,0 +1,186 @@
+// =============================================================================
+// Blokken: Logo's / certificeringen en Contactgegevens
+// =============================================================================
+
+.mk-logos {
+    &__layout {
+        display: grid;
+        gap: 40px;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        max-width: 720px;
+    }
+
+    &__list {
+        @include reset-list;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+
+        img {
+            width: auto;
+            max-width: 180px;
+            max-height: 96px;
+            object-fit: contain;
+        }
+    }
+
+    // Raster met lijnen naast de tekst (over ons)
+    &--naast {
+        .mk-logos__list {
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+            border-left: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .mk-logos__item {
+            height: 160px;
+            border-right: 1px solid rgba(255, 255, 255, 0.18);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        @include mq(md) {
+            .mk-logos__layout {
+                grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+                gap: clamp(48px, 6vw, 104px);
+                align-items: center;
+            }
+        }
+    }
+
+    // Rij onder de tekst (certificeringen)
+    &--onder {
+        .mk-logos__layout {
+            gap: 56px;
+        }
+
+        .mk-logos__list {
+            gap: 24px 48px;
+
+            @include mq(md) {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        .mk-logos__item {
+            height: 96px;
+            padding: 0;
+
+            img {
+                max-width: 200px;
+            }
+        }
+    }
+}
+
+.mk-contact {
+    &__layout {
+        display: grid;
+        gap: 24px;
+
+        @include mq(md) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+            gap: 32px;
+            align-items: stretch;
+        }
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        padding: 28px 24px;
+
+        @include mq(md) {
+            padding: 32px;
+        }
+
+        &--depts {
+            padding-bottom: 14px;
+        }
+    }
+
+    &__title {
+        font-size: $font-size-card;
+        font-weight: 700;
+        line-height: $line-height-card;
+    }
+
+    &__row {
+        display: flex;
+        gap: 14px;
+        font-size: 16px;
+        line-height: 1.6;
+
+        address {
+            font-style: normal;
+        }
+    }
+
+    &__call {
+        margin-top: auto;
+        padding-top: 24px;
+        border-top: 1px solid #E3E6EB;
+
+        @include mq(lg) {
+            max-width: 340px;
+        }
+    }
+
+    &__depts {
+        @include reset-list;
+    }
+
+    &__dept {
+        display: flex;
+        gap: 16px;
+        padding: 18px 0;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #E3E6EB;
+        }
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+    }
+
+    &__dept-title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    &__dept-text {
+        font-size: 15px;
+        line-height: 1.55;
+        color: #3A3C4E;
+    }
+
+    &__mail {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        word-break: break-all;
+    }
+}

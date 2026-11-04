@@ -1,0 +1,80 @@
+// =============================================================================
+// Blok: USP-balk
+// =============================================================================
+
+.mk-usp {
+    &__list {
+        @include reset-list;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px 32px;
+
+        @include mq(sm) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mq(lg) {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.25;
+
+        @include mq(xl) {
+            font-size: 18px;
+        }
+    }
+
+    &__check {
+        flex: none;
+        stroke-width: 2.8;
+    }
+
+    // Donker met vinkjes (categorie-, product- en oplossingspagina's)
+    &--donker {
+        background: $gradient-usp;
+        color: $color-white;
+        padding: 24px 0;
+
+        @include mq(lg) {
+            padding: 40px 0;
+        }
+
+        .mk-usp__check {
+            color: $color-check;
+        }
+    }
+
+    // Wit met accentwoord (homepage)
+    &--licht {
+        background: $color-white;
+        color: $color-secondary;
+        padding: 24px 0;
+
+        .mk-usp__item {
+            justify-content: center;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .accent {
+            color: $color-primary;
+        }
+
+        @include mq(lg) {
+            padding: 36px 0;
+
+            .mk-usp__list {
+                justify-content: space-around;
+            }
+        }
+    }
+}

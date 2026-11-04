@@ -1,0 +1,150 @@
+// =============================================================================
+// Basis: reset + typografie
+// =============================================================================
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(#{$custom-header-height-mobile} + 16px);
+
+    @include mq(lg) {
+        scroll-padding-top: calc(#{$custom-header-height} + 16px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+body {
+    margin: 0;
+    font-family: $font-family-standard-font;
+    font-size: $font-size-normal;
+    font-weight: $font-weight-normal;
+    line-height: $line-height-normal;
+    color: $color-secondary;
+    background: $color-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.freeze {
+    overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+figure,
+blockquote {
+    margin: 0;
+}
+
+h1 { @include text-h1; }
+h2 { @include text-h2; }
+h3 { @include text-h3; }
+
+h1,
+h2,
+h3 {
+    color: inherit;
+}
+
+img,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    color: $color-primary;
+    transition: color $transition;
+
+    &:hover {
+        color: $color-primary-hover;
+    }
+
+    &:focus-visible {
+        @include focus-ring;
+    }
+}
+
+button {
+    font-family: inherit;
+}
+
+strong,
+b {
+    font-weight: 700;
+}
+
+// Accentwoord in koppen (bijv. "Centrale <span class="accent">smering</span>")
+.accent {
+    color: $color-accent;
+}
+
+.sr-only,
+.screen-reader-text {
+    @include sr-only;
+}
+
+.skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 10000;
+    padding: 12px 20px;
+    background: $color-white;
+    color: $color-secondary;
+    font-weight: 700;
+    border-radius: $custom-radius-button;
+
+    &:focus {
+        top: 16px;
+    }
+}
+
+#main-content {
+    overflow-x: clip;
+}
+
+// Opgemaakte WYSIWYG-tekst in blokken
+.mk-richtext {
+    > * + * {
+        margin-top: 1em;
+    }
+
+    ul,
+    ol {
+        padding-left: 1.2em;
+        line-height: 1.8;
+    }
+
+    a {
+        font-weight: 600;
+    }
+}

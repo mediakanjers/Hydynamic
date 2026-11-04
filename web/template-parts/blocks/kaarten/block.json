@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "mk/kaarten",
+  "title": "Tekstkaarten",
+  "description": "2 of 3 kaarten met titel en tekst.",
+  "category": "hydynamic",
+  "icon": "index-card",
+  "keywords": [
+    "hydynamic",
+    "sectie"
+  ],
+  "acf": {
+    "blockVersion": 3,
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "hideFieldsInSidebar": true
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "html": false,
+    "customClassName": true,
+    "multiple": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {}
+    }
+  }
+}

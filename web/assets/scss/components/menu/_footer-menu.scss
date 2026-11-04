@@ -1,0 +1,25 @@
+.mk-nav-footer {
+    .menu-footermenu-container {
+        #menu-footermenu {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            justify-content: end;
+            gap: 10px;
+            li {
+                &::marker {
+                    content: "";
+                    display: none;
+                    width: 0;
+                    height: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                }
+                a {
+                    color: $font-color-normal;
+                    text-decoration: none;
+                }
+            }   
+        }
+    }
+}

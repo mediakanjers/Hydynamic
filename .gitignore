@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Lokale opbouwmedia (gegenereerd door setup/prep_media.py, groot)
+setup/media/
+
+# Bronbestanden die niet in de repo horen (groot of bevatten gebruikersgegevens)
+export-wordpress/
+sfeer/
+design/*.html
+design/*.pdf
+
+# OS / editor
+.DS_Store
+Thumbs.db

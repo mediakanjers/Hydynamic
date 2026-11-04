@@ -1,0 +1,178 @@
+// =============================================================================
+// Blok: Offerteformulier (+ Gravity Forms-opmaak)
+// =============================================================================
+
+.mk-offerte {
+    overflow: hidden;
+
+    &:focus {
+        outline: none;
+    }
+
+    &__lines {
+        position: absolute;
+        left: -560px;
+        top: 110px;
+        width: 1300px;
+        max-width: none;
+        height: auto;
+        pointer-events: none;
+
+        @include mq-down(md) {
+            display: none;
+        }
+    }
+
+    &__layout {
+        position: relative;
+        display: grid;
+        gap: 40px;
+        max-width: calc(1350px + (#{$custom-gutter} * 2));
+
+        @include mq(md) {
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+            gap: clamp(40px, 5vw, 96px);
+            align-items: start;
+        }
+    }
+
+    &__intro {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    &__title {
+        font-size: clamp(31px, 1.2rem + 2.2vw, 46px);
+        font-weight: 500;
+        line-height: 1.2;
+
+        .accent {
+            font-weight: 800;
+        }
+    }
+
+    &__subline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        font-weight: 700;
+
+        @include mq(lg) {
+            font-size: 20px;
+        }
+    }
+
+    &__checkbox {
+        flex: none;
+        color: #2E9A1F;
+        stroke-width: 2.6;
+    }
+
+    &__green {
+        color: #23A40F;
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        max-width: 442px;
+        padding: 28px 28px 32px;
+        background: $color-white;
+        border-radius: $custom-radius-field;
+        margin-top: 12px;
+
+        @include mq(lg) {
+            padding: 32px 36px 40px;
+        }
+    }
+
+    &__card-title {
+        margin-bottom: 4px;
+        font-size: clamp(24px, 1.1rem + 0.8vw, 29px);
+        font-weight: 700;
+        line-height: 1.25;
+    }
+
+    &__contact {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        width: fit-content;
+        color: $color-secondary;
+        font-size: 16px;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-primary;
+        }
+
+        @include mq(lg) {
+            font-size: 17px;
+        }
+    }
+
+    &__contact-icon {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: $color-bg-icon;
+        color: $color-primary;
+    }
+
+    &__route {
+        aspect-ratio: 3 / 2;
+        background: #000;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 55%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 55%, rgba(0, 0, 0, 0.9) 100%);
+            pointer-events: none;
+        }
+    }
+
+    &__route-btn {
+        position: absolute;
+        left: 50%;
+        bottom: 28px;
+        z-index: 1;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
+
+    // Contactpagina: formulier links, foto rechts
+    &--route .mk-offerte__layout {
+        @include mq(md) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+    }
+
+    &--route .mk-offerte__intro {
+        @include mq(md) {
+            order: 2;
+        }
+    }
+}
+
+.mk-status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #8A8D9C;
+
+    &.is-open {
+        background: $color-green-dot;
+    }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "mk/home-hero",
+  "title": "Homepage hero",
+  "description": "Grote achtergrondfoto met H1 en vier tegels.",
+  "category": "hydynamic",
+  "icon": "cover-image",
+  "keywords": [
+    "hydynamic",
+    "sectie"
+  ],
+  "acf": {
+    "blockVersion": 3,
+    "mode": "preview",
+    "renderTemplate": "render.php",
+    "hideFieldsInSidebar": true
+  },
+  "supports": {
+    "align": false,
+    "anchor": true,
+    "html": false,
+    "customClassName": true,
+    "multiple": true
+  },
+  "example": {
+    "attributes": {
+      "mode": "preview",
+      "data": {}
+    }
+  }
+}

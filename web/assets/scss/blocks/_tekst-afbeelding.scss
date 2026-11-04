@@ -1,0 +1,152 @@
+// =============================================================================
+// Blok: Tekst met afbeelding / fotoslider / logo
+// =============================================================================
+
+.mk-split {
+    &__layout {
+        display: grid;
+        gap: 32px;
+        align-items: center;
+
+        @include mq(md) {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(40px, 5.5vw, 105px);
+        }
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        @include mq(md) {
+            max-width: 700px;
+        }
+    }
+
+    &__body {
+        font-size: $font-size-normal;
+        line-height: $line-height-normal;
+
+        // Subkopjes in de tekst ("Hydrauliekslangen:") in primair blauw
+        strong:first-child:not(:only-child),
+        h3,
+        h4 {
+            color: $color-primary;
+            font-weight: 600;
+            font-size: inherit;
+        }
+    }
+
+    &__actions {
+        margin-top: 16px;
+    }
+
+    &__media {
+        .mk-photo {
+            aspect-ratio: 790 / 506;
+        }
+    }
+
+    &__logo {
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: auto;
+            max-width: min(100%, 420px);
+            max-height: 160px;
+            object-fit: contain;
+        }
+    }
+
+    // Media links: op desktop omdraaien, op mobiel altijd tekst eerst
+    &--media-links &__media {
+        @include mq(md) {
+            order: -1;
+        }
+    }
+
+    &--media-links &__text {
+        @include mq(md) {
+            padding-left: clamp(0px, 3vw, 50px);
+        }
+    }
+
+    // Afbeelding loopt door tot de rand (homepage "Sinds 1997")
+    &--bleed {
+        overflow: hidden;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        .mk-split__bleed {
+            position: relative;
+
+            img {
+                width: 100%;
+                aspect-ratio: 16 / 10;
+                object-fit: cover;
+            }
+        }
+
+        .mk-split__layout {
+            padding-top: $spacing-section-s;
+            padding-bottom: $spacing-section-s;
+        }
+
+        display: flex;
+        flex-direction: column-reverse;
+
+        @include mq(md) {
+            display: block;
+            min-height: 500px;
+
+            .mk-split__bleed {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 61%;
+
+                img {
+                    height: 100%;
+                    aspect-ratio: auto;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: 0;
+                    z-index: 1;
+                }
+            }
+
+            .mk-split__layout {
+                position: relative;
+                z-index: 2;
+                min-height: 500px;
+            }
+        }
+    }
+
+    &--bleed.mk-split--media-rechts .mk-split__bleed {
+        right: 0;
+
+        &::before {
+            background: linear-gradient(90deg, $color-header 0%, rgba(26, 27, 41, 0) 30%);
+        }
+    }
+
+    &--bleed.mk-split--media-links .mk-split__bleed {
+        left: 0;
+
+        &::before {
+            background: linear-gradient(270deg, $color-header 0%, rgba(26, 27, 41, 0) 30%);
+        }
+    }
+
+    &--bleed.mk-split--media-links .mk-split__text {
+        @include mq(md) {
+            grid-column: 2;
+        }
+    }
+}

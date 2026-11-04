@@ -1,0 +1,191 @@
+// =============================================================================
+// Blok: Paginakop
+// =============================================================================
+
+.mk-paginakop {
+    overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: clamp(40px, 5vw, 64px);
+
+    @include mq(lg) {
+        padding-top: 32px;
+    }
+
+    // Tegels/downloads direct eronder sluiten aan in dezelfde grijze vlakte
+    + .mk-tegels.mk-bg--grijs,
+    + .mk-downloads-block.mk-bg--grijs {
+        padding-top: 0;
+    }
+
+    &__lines {
+        position: absolute;
+        top: -40px;
+        left: 42%;
+        width: 1500px;
+        max-width: none;
+        height: auto;
+        pointer-events: none;
+        opacity: 0.8;
+
+        @include mq-down(md) {
+            left: 20%;
+            width: 900px;
+            opacity: 0.5;
+        }
+    }
+
+    .mk-crumbs {
+        margin-bottom: clamp(28px, 4vw, 56px);
+    }
+
+    &__layout {
+        position: relative;
+        display: grid;
+        gap: 32px;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 780px;
+    }
+
+    &__title {
+        @include text-h1;
+    }
+
+    &__intro {
+        font-size: $font-size-normal;
+        line-height: $line-height-normal;
+    }
+
+    &__actions {
+        margin-top: 8px;
+    }
+
+    &--compact {
+        padding-bottom: 40px;
+    }
+
+    // Variant: tekst met afbeelding rechts (oplossing)
+    &--afbeelding {
+        @include mq(md) {
+            .mk-paginakop__layout {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                align-items: center;
+                gap: clamp(32px, 4vw, 64px);
+            }
+        }
+
+        .mk-paginakop__media {
+            aspect-ratio: 4 / 3;
+
+            @include mq(md) {
+                aspect-ratio: 790 / 590;
+            }
+        }
+    }
+
+    // Variant: downloads links, fotoslider rechts (product)
+    &--slider {
+        .mk-paginakop__layout {
+            @include mq(md) {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                grid-template-areas:
+                    "text text"
+                    "aside media";
+                align-items: start;
+                column-gap: clamp(24px, 2.4vw, 38px);
+                row-gap: 40px;
+            }
+        }
+
+        .mk-paginakop__text {
+            max-width: 1240px;
+
+            @include mq(md) { grid-area: text; }
+        }
+
+        .mk-paginakop__aside {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(24px, 2vw, 40px);
+            align-items: flex-start;
+            order: 2;
+
+            .mk-downloads {
+                width: 100%;
+            }
+
+            @include mq(md) { grid-area: aside; }
+        }
+
+        .mk-paginakop__media {
+            order: 1;
+
+            @include mq(md) { grid-area: media; }
+        }
+    }
+
+    // Variant: tekst op foto (over ons)
+    &--achtergrond {
+        padding-bottom: 0;
+
+        .mk-paginakop__bg {
+            position: relative;
+            margin: 0 calc(#{$custom-gutter} * -1);
+            order: 2;
+
+            img {
+                width: 100%;
+                aspect-ratio: 4 / 3;
+                object-fit: cover;
+            }
+        }
+
+        .mk-paginakop__layout {
+            padding-bottom: 40px;
+        }
+
+        @include mq(md) {
+            min-height: 640px;
+            padding-bottom: clamp(64px, 7vw, 96px);
+
+            .mk-paginakop__bg {
+                position: absolute;
+                inset: 0 0 0 auto;
+                width: 66%;
+                margin: 0;
+
+                img {
+                    height: 100%;
+                    aspect-ratio: auto;
+                    object-position: 60% 50%;
+                }
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    inset: 0 0 0 -52%;
+                    background: linear-gradient(90deg, $color-bg-page 0%, $color-bg-page 36%, rgba(233, 237, 242, 0.92) 44%, rgba(233, 237, 242, 0.55) 56%, rgba(233, 237, 242, 0) 74%);
+                }
+            }
+
+            .mk-paginakop__text {
+                max-width: 560px;
+                padding-top: 56px;
+            }
+        }
+    }
+}
+
+// Op mobiel staat bij de achtergrondvariant de foto onder de tekst
+.mk-paginakop--achtergrond {
+    display: flex;
+    flex-direction: column;
+
+    @include mq(md) {
+        display: block;
+    }
+}

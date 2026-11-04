@@ -1,0 +1,242 @@
+// =============================================================================
+// Header
+// Mobiel: logo + zoeken + menuknop. Vanaf lg (1200px): menu inline in de balk.
+// =============================================================================
+
+.mk-header {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background: $color-header;
+    color: $color-white;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+
+    .admin-bar & {
+        top: 46px;
+
+        @media screen and (min-width: 783px) {
+            top: 32px;
+        }
+    }
+
+    &__inner {
+        @include container;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        min-height: $custom-header-height-mobile;
+
+        @include mq(nav) {
+            min-height: $custom-header-height;
+            gap: clamp(14px, 1.4vw, 40px);
+            // Menu + knop + taal vragen meer ruimte dan de contentbreedte op 1200–1600px
+            padding-left: clamp(24px, 3vw, #{$custom-gutter});
+            padding-right: clamp(24px, 3vw, #{$custom-gutter});
+        }
+
+        @include mq(xl) {
+            padding-left: $custom-gutter;
+            padding-right: $custom-gutter;
+        }
+    }
+
+    &__logo {
+        flex: none;
+        display: block;
+        margin-right: auto;
+
+        img {
+            width: 132px;
+            max-width: none;
+            height: auto;
+
+            @include mq(md) {
+                width: 160px;
+            }
+
+            @include mq(nav) {
+                width: clamp(140px, 10vw, 190px);
+            }
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        @include mq(nav) {
+            gap: 16px;
+        }
+    }
+
+    &__icon-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: $color-white;
+        cursor: pointer;
+        border-radius: $custom-radius-button;
+
+        &:hover {
+            color: $color-accent-light;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+    }
+
+    &__cta {
+        display: none;
+        white-space: nowrap;
+
+        @include mq(nav) {
+            display: inline-flex;
+        }
+    }
+
+    &__menu-btn {
+        @include mq(nav) {
+            display: none;
+        }
+    }
+
+    // Homepage: header transparant over de hero, donker zodra er gescrold wordt
+    &--overlay {
+        @include mq(nav) {
+            position: fixed;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(26, 27, 41, 0.75) 0%, rgba(26, 27, 41, 0) 100%);
+
+            &.is-scrolled {
+                background: $color-header;
+                box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+            }
+        }
+    }
+}
+
+// Hamburger-icoon dat verandert in een kruis
+.mk-burger {
+    position: relative;
+    width: 28px;
+    height: 20px;
+
+    span {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        border-radius: 2px;
+        background: currentColor;
+        transition: transform 0.25s ease, opacity 0.2s ease, top 0.25s ease;
+
+        &:nth-child(1) { top: 0; }
+        &:nth-child(2) { top: 8.5px; }
+        &:nth-child(3) { top: 17px; }
+    }
+
+    [aria-expanded="true"] & {
+        span:nth-child(1) { top: 8.5px; transform: rotate(45deg); }
+        span:nth-child(2) { opacity: 0; }
+        span:nth-child(3) { top: 8.5px; transform: rotate(-45deg); }
+    }
+}
+
+// Taalkeuze (WPML)
+.mk-lang {
+    position: relative;
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 34px;
+        padding: 0 8px;
+        border: 0;
+        border-radius: 3px;
+        background: $color-white;
+        color: $color-header;
+        cursor: pointer;
+
+        &:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+
+        @include mq(nav) {
+            height: 40px;
+            padding: 0 10px;
+        }
+    }
+
+    &__flag {
+        flex: none;
+        width: 24px;
+        max-width: none;
+        height: auto;
+        border-radius: 1px;
+
+        @include mq(nav) {
+            width: 28px;
+        }
+    }
+
+    &__list {
+        @include reset-list;
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        min-width: 170px;
+        padding: 6px 0;
+        background: $color-white;
+        border-radius: $custom-radius-button;
+        box-shadow: $custom-shadow-hover;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            color: $color-secondary;
+            font-size: 15px;
+            text-decoration: none;
+
+            &:hover {
+                background: #EEF3FA;
+                color: $color-primary;
+            }
+        }
+    }
+}
+
+// Ruimte onder een fixed header (alleen homepage desktop)
+.has-overlay-header #main-content > .entry-content > :first-child:not(.mk-home-hero) {
+    @include mq(nav) {
+        padding-top: calc(#{$custom-header-height} + #{$spacing-l});
+    }
+}
+
+// Specifieker dan .mk-button (die display: inline-flex zet)
+.mk-header__actions .mk-header__cta {
+    display: none;
+
+    @include mq(nav) {
+        display: inline-flex;
+    }
+}

@@ -1,0 +1,31 @@
+// =============================================================================
+// Gutenberg: Hydynamic-blokken zijn volle-breedte secties. Overige (core)
+// blokken krijgen de standaardcontainer.
+// =============================================================================
+
+.entry-content > :not(.mk-section):not(.mk-usp):not(.mk-home-hero):not(.mk-kolommen-outer):not(script):not(style) {
+    @include container;
+    margin-top: $spacing-l;
+    margin-bottom: $spacing-l;
+}
+
+// Editor: blokpreviews tonen zoals op de site
+.editor-styles-wrapper {
+    font-family: $font-family-standard-font;
+
+    .mk-header--overlay {
+        position: static;
+    }
+
+    // Links in previews zijn niet klikbaar (voorkomt wegnavigeren uit de editor)
+    .mk-section a,
+    .mk-home-hero a,
+    .mk-usp a {
+        pointer-events: none;
+    }
+
+    .mk-tegels__grid,
+    .mk-kennisbank__grid {
+        overflow: visible;
+    }
+}

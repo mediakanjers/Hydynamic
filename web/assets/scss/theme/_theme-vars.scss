@@ -1,0 +1,145 @@
+// ⚠️ Automatisch gegenereerd uit theme.json – niet handmatig aanpassen!
+$color-primary: #1F6FC4;
+$color-primary-hover: #164F8C;
+$color-secondary: #1C1D2B;
+$color-header: #1A1B29;
+$color-accent: #2D8CEB;
+$color-accent-light: #5AA8F0;
+$color-check: #3FA2F0;
+$color-footer-link: #8CC4FF;
+$color-photo: #2A2D3E;
+$color-bg-page: #E9EDF2;
+$color-bg-grey: #EEF1F4;
+$color-bg-light: #F7F8FA;
+$color-bg-fade: #F1F3F6;
+$color-bg-contact: #E1E6F4;
+$color-bg-icon: #E3EEFB;
+$color-bg-note: #D3DAEC;
+$color-line: #E3E6EE;
+$color-text-secondary: #3A3D52;
+$color-text-meta: #555869;
+$color-navy-dark: #04163A;
+$color-navy: #0A2E6A;
+$color-navy-light: #0A4A9C;
+$color-pdf: #C8102E;
+$color-green: #2E7A1F;
+$color-green-dot: #2DB51F;
+$color-error: #B3261E;
+$color-white: #FFFFFF;
+
+$layout-content-size: 1620px;
+$layout-wide-size: 1920px;
+
+$font-size-label: 11px;
+$line-height-label: 1.2;
+$font-weight-label: 800;
+
+$font-size-meta: 13px;
+$line-height-meta: 1.4;
+$font-weight-meta: 400;
+$font-color-meta: #555869;
+
+$font-size-small: 14px;
+$line-height-small: 1.5;
+$font-weight-small: 400;
+$font-color-small: #1C1D2B;
+
+$font-size-tile: 15px;
+$line-height-tile: 1.5;
+$font-weight-tile: 400;
+$font-color-tile: #3A3D52;
+
+$font-size-medium: 16px;
+$line-height-medium: 1.6;
+$font-weight-medium: 400;
+$font-color-medium: #1C1D2B;
+
+$font-size-normal: 17px;
+$line-height-normal: 1.6;
+$font-weight-normal: 400;
+$font-color-normal: #1C1D2B;
+
+$font-size-intro: 18px;
+$line-height-intro: 1.6;
+$font-weight-intro: 400;
+$font-color-intro: #1C1D2B;
+
+$font-size-large: 18px;
+$line-height-large: 1.35;
+$font-weight-large: 600;
+
+$font-size-card: clamp(19px, 1.1rem + 0.4vw, 22px);
+$line-height-card: 1.35;
+$font-weight-card: 600;
+
+$font-size-label-head: clamp(24px, 1.2rem + 0.9vw, 29px);
+$line-height-label-head: 1.25;
+$font-weight-label-head: 700;
+
+$font-size-extra-large: clamp(27px, 1.25rem + 1.5vw, 36px);
+$line-height-extra-large: 1.2;
+$font-weight-extra-large: 600;
+
+$font-size-huge: clamp(31px, 1.25rem + 2.3vw, 44px);
+$line-height-huge: 1.15;
+$font-weight-huge: 700;
+
+$font-family-standard-font: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+$spacing-xs: 8px;
+$spacing-s: 16px;
+$spacing-m: 24px;
+$spacing-l: 40px;
+$spacing-section-s: clamp(48px, 6vw, 80px);
+$spacing-section: clamp(56px, 7vw, 96px);
+$spacing-section-l: clamp(64px, 8vw, 112px);
+
+$custom-gutter: max(20px, calc(8vw - 8px));
+$custom-radius-button: 4px;
+$custom-radius-field: 6px;
+$custom-radius-card: 8px;
+$custom-radius-tile: 12px;
+$custom-radius-photo: 10px;
+$custom-shadow-card: 0 4px 14px rgba(28, 29, 43, 0.10);
+$custom-shadow-article: 0 2px 10px rgba(28, 29, 43, 0.12);
+$custom-shadow-photo: 0 8px 24px rgba(28, 29, 43, 0.18);
+$custom-shadow-hover: 0 12px 28px rgba(28, 29, 43, 0.16);
+$custom-header-height: clamp(72px, 5.2vw, 100px);
+$custom-header-height-mobile: 64px;
+$custom-button-height: 52px;
+$custom-button-height-small: 44px;
+$custom-breakpoint-sm: 600px;
+$custom-breakpoint-md: 900px;
+$custom-breakpoint-lg: 1200px;
+$custom-breakpoint-xl: 1440px;
+
+$h1-font-size: clamp(31px, 1.25rem + 2.3vw, 44px);
+$h1-font-weight: 700;
+$h1-line-height: 1.15;
+$h1-color: #1C1D2B;
+
+$h2-font-size: clamp(27px, 1.25rem + 1.5vw, 36px);
+$h2-font-weight: 600;
+$h2-line-height: 1.2;
+$h2-color: #1C1D2B;
+
+$h3-font-size: 18px;
+$h3-font-weight: 600;
+$h3-line-height: 1.35;
+$h3-color: #1C1D2B;
+
+$h4-font-size: 18px;
+$h4-font-weight: 700;
+$h4-line-height: 1.35;
+$h4-color: #1C1D2B;
+
+$h5-font-size: 17px;
+$h5-font-weight: 700;
+$h5-line-height: 1.4;
+$h5-color: #1C1D2B;
+
+$h6-font-size: 15px;
+$h6-font-weight: 700;
+$h6-line-height: 1.4;
+$h6-color: #1C1D2B;
+
