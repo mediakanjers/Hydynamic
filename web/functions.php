@@ -1,5 +1,7 @@
 <?php
     require get_stylesheet_directory() . '/assets/functions/custom-functions.php';
+    require get_stylesheet_directory() . '/assets/functions/i18n.php';
+    require get_stylesheet_directory() . '/assets/functions/i18n-admin.php';
     require get_stylesheet_directory() . '/assets/functions/nav-walker.php';
     require get_stylesheet_directory() . '/assets/functions/theme-setup.php';
     require get_stylesheet_directory() . '/assets/functions/enqueue-scripts.php';

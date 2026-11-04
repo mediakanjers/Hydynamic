@@ -92,7 +92,7 @@ function hyd_offerte_url() {
 }
 
 function hyd_offerte_fallback_url() {
-    $page = function_exists('get_field') ? get_field('offerte_fallback', 'option') : null;
+    $page = function_exists('hyd_opt') ? hyd_opt('offerte_fallback') : null;
     $url  = $page ? get_permalink($page) : home_url('/contact/');
     return trailingslashit($url) . '#offerte';
 }
@@ -154,7 +154,9 @@ function hyd_image($image, $size = 'large', $attr = []) {
         $attr['fetchpriority'] = 'high';
     }
     if (!isset($attr['alt'])) {
-        $alt = get_post_meta($id, '_wp_attachment_image_alt', true);
+        // Engelse alt-tekst op hydynamic.com (afbeeldingen worden door beide talen gedeeld)
+        $alt = function_exists('hyd_is_en') && hyd_is_en() ? get_post_meta($id, '_hyd_alt_en', true) : '';
+        $alt = $alt !== '' ? $alt : get_post_meta($id, '_wp_attachment_image_alt', true);
         $attr['alt'] = $alt !== '' ? $alt : get_the_title($id);
     }
     return wp_get_attachment_image($id, $size, false, $attr);
@@ -192,7 +194,9 @@ function hyd_breadcrumbs($is_preview = false) {
         if ($type && !in_array($type, ['page', 'post'], true)) {
             $obj = get_post_type_object($type);
             $slug = $obj && !empty($obj->rewrite['slug']) ? $obj->rewrite['slug'] : $type;
-            $overview = get_page_by_path($slug);
+            $bases    = function_exists('hyd_cpt_bases') ? (hyd_cpt_bases()[$type] ?? []) : [];
+            $slug     = $bases[function_exists('hyd_lang') ? hyd_lang() : 'nl'] ?? $slug;
+            $overview = function_exists('hyd_find_by_path') ? get_post(hyd_find_by_path($slug, 'page', hyd_lang())) : get_page_by_path($slug);
             if ($overview) {
                 $items[] = ['label' => get_the_title($overview), 'url' => get_permalink($overview)];
             }

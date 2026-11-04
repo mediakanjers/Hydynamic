@@ -1,0 +1,90 @@
+<?php
+/**
+ * Engelse vertalingen van de themateksten (tekstdomein 'mk').
+ * Sleutel = Nederlandse brontekst zoals in __() / esc_html_e() gebruikt.
+ */
+
+return [
+    // Algemeen / navigatie
+    'Direct naar de inhoud'                 => 'Skip to content',
+    'naar de homepage'                      => 'to the homepage',
+    'Hoofdmenu'                             => 'Main menu',
+    'Menu openen'                           => 'Open menu',
+    'Menu sluiten'                          => 'Close menu',
+    'Submenu %s openen'                     => 'Open %s submenu',
+    'Taal kiezen, huidige taal %s'          => 'Choose language, current language %s',
+    'Terug naar boven'                      => 'Back to top',
+    'Kruimelpad'                            => 'Breadcrumb',
+    'Homepage'                              => 'Home',
+    'Pagina niet gevonden'                  => 'Page not found',
+    'Kernpunten'                            => 'Key points',
+    'Paginering'                            => 'Pagination',
+    'Vorige pagina'                         => 'Previous page',
+    'Volgende pagina'                       => 'Next page',
+
+    // Zoeken
+    'Zoeken'                                => 'Search',
+    'Zoeken op de website'                  => 'Search the website',
+    'Zoeken sluiten'                        => 'Close search',
+    'Zoek op product, oplossing of artikel…' => 'Search for a product, solution or article…',
+    'Zoeksuggesties'                        => 'Search suggestions',
+    'Zoekresultaten voor'                   => 'Search results for',
+    'Zoekterm'                              => 'Search term',
+    'Waar bent u naar op zoek?'             => 'What are you looking for?',
+    '%d resultaat gevonden'                 => '%d result found',
+    '%d resultaten gevonden'                => '%d results found',
+    '%d suggesties beschikbaar'             => '%d suggestions available',
+    'Bekijk alle resultaten'                => 'View all results',
+    'Geen directe resultaten. Druk op Enter om alle resultaten te bekijken.' => 'No direct results. Press Enter to view all results.',
+    'Geen resultaten gevonden. Probeer een andere zoekterm of neem contact met ons op.' => 'No results found. Try another search term or contact us.',
+    'Pagina'                                => 'Page',
+    'Product'                               => 'Product',
+    'Oplossing'                             => 'Solution',
+    'Dienst'                                => 'Service',
+    'Kennisbank'                            => 'Knowledge base',
+
+    // Knoppen en blokken
+    'Offerte aanvragen'                     => 'Request a quote',
+    'Aanvraag versturen'                    => 'Send request',
+    'Lees meer'                             => 'Read more',
+    'over %s'                               => 'about %s',
+    'Bekijk alle artikelen'                 => 'View all articles',
+    'Bekijk alle veelgestelde vragen'       => 'View all frequently asked questions',
+    'Veelgestelde vragen'                   => 'Frequently asked questions',
+    'Downloads'                             => 'Downloads',
+    'Er zijn nog geen artikelen gepubliceerd.' => 'No articles have been published yet.',
+    'Certificeringen'                       => 'Certifications',
+    'Sfeerimpressie'                        => 'Impression',
+    "Foto's"                                => 'Photos',
+    "Foto's van %s"                         => 'Photos of %s',
+    'Vorige foto'                           => 'Previous photo',
+    'Volgende foto'                         => 'Next photo',
+    "Vorige foto's"                         => 'Previous photos',
+    "Volgende foto's"                       => 'Next photos',
+    'carrousel'                             => 'carousel',
+    'dia'                                   => 'slide',
+    '%1$d van %2$d'                         => '%1$d of %2$d',
+
+    // Offerte en contact
+    'Start vandaag met een oplossing die werkt.' => 'Start today with a solution that works.',
+    'die werkt.'                            => 'that works.',
+    'Vraag vrijblijvend een offerte op maat aan.' => 'Request a no-obligation custom quote.',
+    'Liever direct contact?'                => 'Prefer to talk directly?',
+    'contact?'                              => 'talk directly?',
+    'Nu bereikbaar'                         => 'Available now',
+    'Nu gesloten'                           => 'Currently closed',
+    'nu bereikbaar'                         => 'available now',
+    'nu gesloten'                           => 'currently closed',
+    'Plan route in Google Maps'             => 'Plan your route in Google Maps',
+    'Contactgegevens'                       => 'Contact details',
+    'Bezoek- en postadres'                  => 'Visiting and postal address',
+    'Nederland'                             => 'The Netherlands',
+    'Openingstijden'                        => 'Opening hours',
+    'Maandag t/m vrijdag 8:00 - 17:00'      => 'Monday to Friday 8:00 – 17:00',
+    'Bel %s'                                => 'Call %s',
+
+    // Footer
+    'DNV managementsysteemcertificaat ISO 9001' => 'DNV management system certificate ISO 9001',
+    'Gerealiseerd door'                     => 'Created by',
+    'Sitemap'                               => 'Sitemap',
+];

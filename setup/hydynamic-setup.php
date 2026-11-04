@@ -123,7 +123,7 @@ function upsert($type, $slug, $title, $content, $args = []) {
 }
 
 function link_to($id, $title = '') {
-    return ['title' => $title ?: get_the_title($id), 'url' => get_permalink($id), 'target' => ''];
+    return ['title' => $title ?: get_the_title($id), 'url' => wp_make_link_relative(get_permalink($id)), 'target' => '']; // relatief: werkt op .nl én .com
 }
 
 /** PDF van de live site importeren (eenmalig, herkend op pad). */
@@ -153,7 +153,7 @@ function hyd_rename($type, $old, $new, $title = null) {
 }
 
 function pdf_link($id, $title) {
-    return $id ? ['title' => $title, 'url' => wp_get_attachment_url($id), 'target' => '_blank'] : '';
+    return $id ? ['title' => $title, 'url' => wp_make_link_relative(wp_get_attachment_url($id)), 'target' => '_blank'] : '';
 }
 
 function usp(array $items) {
@@ -796,8 +796,8 @@ hyd_menu_item($main, 'Over ons', $page_over);
 hyd_menu_item($main, 'Contact', $page_contact);
 
 $foot = hyd_reset_menu('Footermenu', 'footer_menu');
-hyd_menu_item($foot, 'Privacy Policy', 0, '', 0, wp_get_attachment_url($PDF['privacy']) ?: 'https://hydynamic.com/wp-content/uploads/2023/06/Privacy-statement-NL_2023.pdf', '_blank');
-hyd_menu_item($foot, 'Algemene voorwaarden', 0, '', 0, wp_get_attachment_url($PDF['voorwaarden']) ?: 'https://hydynamic.com/wp-content/uploads/2024/01/General-terms-and-conditions-NL-DE-EN.pdf', '_blank');
+hyd_menu_item($foot, 'Privacy Policy', 0, '', 0, wp_make_link_relative(wp_get_attachment_url($PDF['privacy'])) ?: 'https://hydynamic.com/wp-content/uploads/2023/06/Privacy-statement-NL_2023.pdf', '_blank');
+hyd_menu_item($foot, 'Algemene voorwaarden', 0, '', 0, wp_make_link_relative(wp_get_attachment_url($PDF['voorwaarden'])) ?: 'https://hydynamic.com/wp-content/uploads/2024/01/General-terms-and-conditions-NL-DE-EN.pdf', '_blank');
 
 /* =========================================================================
  * 8. Instellingen

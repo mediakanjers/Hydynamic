@@ -101,9 +101,20 @@ add_action('init', function () {
     ]));
 });
 
+// Engelse URL-bases (hydynamic.com): /products/, /solutions/, /services/
+add_action('init', function () {
+    foreach (hyd_cpt_bases() as $type => $bases) {
+        foreach ($bases as $lang => $base) {
+            if ($base === $bases['nl']) continue;
+            $hier = is_post_type_hierarchical($type);
+            add_rewrite_rule('^' . $base . '/' . ($hier ? '(.+?)' : '([^/]+)') . '/?$', 'index.php?' . $type . '=$matches[1]', 'top');
+        }
+    }
+}, 20);
+
 // Rewrite-regels verversen na het wijzigen van dit bestand (eenmalig per versie)
 add_action('init', function () {
-    $version = '2026-11-04.1';
+    $version = '2026-11-04.2';
     if (get_option('hyd_cpt_version') !== $version) {
         flush_rewrite_rules(false);
         update_option('hyd_cpt_version', $version);
@@ -129,17 +140,35 @@ add_filter('register_post_type_args', function ($args, $type) {
 add_action('template_redirect', function () {
     if (!is_404()) return;
     $path = trim(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
-    $map  = [
-        'producten/hydrauliek'                  => '/producten/hydrauliekslangen-koppelingen/',
-        'producten/onderdelen-centrale-smering' => '/producten/centrale-smering/',
-        'producten/klantspecifiek'              => '/diensten/maatwerk-productie/',
-        'vacature'                              => '/over-ons/',
-        'aanvraag-verstuurd'                    => '/offerte-aanvragen/',
-        'bedankt'                               => '/offerte-aanvragen/',
+    $maps = [
+        'nl' => [
+            'producten/hydrauliek'                  => '/producten/hydrauliekslangen-koppelingen/',
+            'producten/onderdelen-centrale-smering' => '/producten/centrale-smering/',
+            'producten/klantspecifiek'              => '/diensten/maatwerk-productie/',
+            'vacature'                              => '/over-ons/',
+            'aanvraag-verstuurd'                    => '/offerte-aanvragen/',
+            'bedankt'                               => '/offerte-aanvragen/',
+        ],
+        // Oude URL's van de huidige Engelse site op hydynamic.com
+        'en' => [
+            'home'               => '/',
+            'company-profile'    => '/about-us/',
+            'products-overview'  => '/products/',
+            'resources'          => '/knowledge-base/',
+            'vacancies'          => '/about-us/',
+            'thank-you'          => '/request-a-quote/',
+            'request-sent'       => '/request-a-quote/',
+            'thank-you-application-form' => '/about-us/',
+            'danfoss-fluid-conveyance'   => '/danfoss-fluid-conveyance-partner/',
+        ],
     ];
+    $map = $maps[function_exists('hyd_lang') ? hyd_lang() : 'nl'] ?? [];
     // Oude informatiepagina's onder /producten/onderdelen-centrale-smering/... (live site)
     if (strpos($path, 'producten/onderdelen-centrale-smering/') === 0) {
         $map[$path] = '/producten/centrale-smering/';
+    }
+    if (strpos($path, 'producten/central-lubrication') === 0) {
+        $map[$path] = '/products/central-lubrication/';
     }
     if (isset($map[$path])) {
         wp_safe_redirect(home_url($map[$path]), 301);

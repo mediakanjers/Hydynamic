@@ -8,15 +8,15 @@ $accent   = get_field('titel') ? get_field('accent') : __('die werkt.', 'mk');
 $subline  = get_field('subregel') ?: __('Vraag vrijblijvend een offerte op maat aan.', 'mk');
 $side     = get_field('zijkant') ?: 'contact';
 $route    = get_field('routefoto');
-$form_id  = (int) (get_field('formulier') ?: (function_exists('get_field') ? get_field('offerte_formulier', 'option') : 0));
+$form_id  = (int) (get_field('formulier') ?: hyd_opt('offerte_formulier'));
 $phone    = hyd_company('telefoon');
 $email    = hyd_company('email');
-$card_t   = get_field('contactkaart_titel', 'option') ?: __('Liever direct contact?', 'mk');
-$card_a   = get_field('contactkaart_accent', 'option') ?: __('contact?', 'mk');
+$card_t   = hyd_opt('contactkaart_titel') ?: __('Liever direct contact?', 'mk');
+$card_a   = hyd_opt('contactkaart_accent') ?: __('contact?', 'mk');
 $open     = hyd_is_open_now();
 
-// "vrijblijvend" groen, zoals in het ontwerp
-$subline_html = preg_replace('/\b(vrijblijvend)\b/u', '<span class="mk-offerte__green">$1</span>', esc_html($subline), 1);
+// "vrijblijvend" / "no-obligation" groen, zoals in het ontwerp
+$subline_html = preg_replace('/\b(vrijblijvend|no-obligation)\b/u', '<span class="mk-offerte__green">$1</span>', esc_html($subline), 1);
 ?>
 <section class="mk-section mk-bg--contact mk-space--normaal mk-offerte mk-offerte--<?php echo esc_attr($side); ?><?php echo !empty($block['className']) ? ' ' . esc_attr($block['className']) : ''; ?>" id="offerte" aria-labelledby="offerte-titel" tabindex="-1">
     <img class="mk-offerte__lines" src="<?php echo esc_url(hyd_brand_asset('achtergrond-h-lijnen.svg')); ?>" alt="" aria-hidden="true" width="1300" height="760">

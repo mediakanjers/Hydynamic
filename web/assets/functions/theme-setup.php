@@ -110,7 +110,7 @@ add_action('rest_api_init', function () {
             $term = trim($request->get_param('q'));
             if (mb_strlen($term) < 2) return [];
 
-            $labels = ['page' => 'Pagina', 'post' => 'Kennisbank', 'producten' => 'Product', 'oplossingen' => 'Oplossing', 'diensten' => 'Dienst'];
+            $labels = ['page' => __('Pagina', 'mk'), 'post' => __('Kennisbank', 'mk'), 'producten' => __('Product', 'mk'), 'oplossingen' => __('Oplossing', 'mk'), 'diensten' => __('Dienst', 'mk')];
             $query  = new WP_Query([
                 's'                   => $term,
                 'post_type'           => array_keys($labels),

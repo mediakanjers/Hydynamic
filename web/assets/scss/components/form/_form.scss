@@ -171,3 +171,8 @@
     font-size: 18px;
     font-weight: 600;
 }
+
+html[lang^="en"] .gform_wrapper .gform_footer::before,
+html[lang^="en"] .gform_wrapper .gform_page_footer::before {
+    content: "We will contact you as soon as possible";
+}
