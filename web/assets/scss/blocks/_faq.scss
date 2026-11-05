@@ -9,7 +9,8 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        width: max(1900px, 120%);
+        // De ellips past net binnen de breedte: aan beide kanten is de ronding zichtbaar
+        width: max(1000px, 96%);
         max-width: none;
         height: auto;
         transform: translate(-50%, -50%);
