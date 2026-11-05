@@ -32,7 +32,10 @@ if ($bleed) $extra[] = 'mk-split--bleed';
                     get_template_part('template-parts/components/slider', null, ['ids' => $slides, 'label' => $title ? wp_strip_all_tags($title) : __('Foto\'s', 'mk')]);
                 elseif ($image) : ?>
                     <div class="<?php echo $media === 'logo' ? 'mk-split__logo' : 'mk-photo'; ?>">
-                        <?php echo hyd_image($image, $media === 'logo' ? 'medium' : 'hyd-section', ['sizes' => $media === 'logo' ? '420px' : '(min-width: 900px) 45vw, 100vw']); ?>
+                        <?php
+                        $img_html = hyd_image($image, $media === 'logo' ? 'medium' : 'hyd-section', ['sizes' => $media === 'logo' ? '420px' : '(min-width: 900px) 45vw, 100vw']);
+                        echo $media === 'logo' ? $img_html : hyd_lightbox($img_html, $image);
+                        ?>
                     </div>
                 <?php elseif ($is_preview ?? false) : ?>
                     <div class="mk-photo mk-photo--empty">Kies een afbeelding</div>

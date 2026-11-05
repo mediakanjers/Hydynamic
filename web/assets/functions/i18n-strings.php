@@ -58,6 +58,8 @@ return [
     "Foto's"                                => 'Photos',
     "Foto's van %s"                         => 'Photos of %s',
     'Vorige'                                => 'Previous',
+    'Foto vergroten: %s'                    => 'Enlarge photo: %s',
+    'Sluiten'                               => 'Close',
     'Volgende'                              => 'Next',
     'Overzicht'                             => 'Overview',
     'Vorige foto'                           => 'Previous photo',

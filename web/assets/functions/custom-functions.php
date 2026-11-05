@@ -258,3 +258,19 @@ function hyd_is_open_now() {
     $mins = (int) $now->format('G') * 60 + (int) $now->format('i');
     return $day <= 5 && $mins >= 480 && $mins < 1020;
 }
+
+/**
+ * Afbeelding in een lightbox-link (wordt door script.js als lightbox geopend).
+ * $group: foto's met dezelfde groep zijn met de pijlen te doorlopen.
+ */
+function hyd_lightbox($image_html, $id, $group = '') {
+    $id = (int) $id;
+    if (!$id || !$image_html) return $image_html;
+    $full = wp_get_attachment_image_src($id, 'hyd-hero') ?: wp_get_attachment_image_src($id, 'full');
+    if (!$full) return $image_html;
+    $alt = function_exists('hyd_is_en') && hyd_is_en() ? get_post_meta($id, '_hyd_alt_en', true) : '';
+    $alt = $alt ?: get_post_meta($id, '_wp_attachment_image_alt', true);
+    return '<a class="mk-lightbox-link" href="' . esc_url($full[0]) . '" data-lightbox="' . esc_attr($group ?: 'foto-' . $id) . '"'
+         . ' data-caption="' . esc_attr($alt) . '" aria-label="' . esc_attr(sprintf(__('Foto vergroten: %s', 'mk'), $alt ?: get_the_title($id))) . '">'
+         . $image_html . '</a>';
+}

@@ -171,33 +171,33 @@
     }
 }
 
-// Pijlknoppen (stijlgids: 48×48, vierkant, primair blauw)
-.mk-tegels__nav {
-    display: flex;
-    justify-content: flex-end;
-    gap: 4px;
-    margin-top: 16px;
-
-    .is-static & {
-        display: none;
-    }
+// Driehoekige pijlen links en rechts naast de tegels (zelfde als de fotoslider)
+.mk-tegels__slider {
+    position: relative;
 }
 
 .mk-tegels__arrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
+    display: none;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 44px;
+    height: 72px;
+    margin-top: -46px; // midden van de tegels (zonder de onderruimte van de track)
     padding: 0;
     border: 0;
-    background: $color-primary;
-    color: $color-white;
+    background: transparent;
+    color: $color-header;
     cursor: pointer;
-    transition: background-color $transition, opacity $transition;
+    align-items: center;
+    justify-content: center;
+    transition: color $transition, opacity $transition;
+
+    &--prev { left: -52px; }
+    &--next { right: -52px; }
 
     &:hover {
-        background: $color-primary-hover;
+        color: $color-primary;
     }
 
     &:focus-visible {
@@ -205,8 +205,25 @@
     }
 
     &[disabled] {
-        opacity: 0.35;
+        opacity: 0.25;
         cursor: default;
+    }
+
+    // Vanaf tablet naast de tegels; op mobiel swipen
+    @include mq(md) {
+        display: inline-flex;
+    }
+
+    .is-static & {
+        display: none;
+    }
+}
+
+.is-dark .mk-tegels__arrow {
+    color: $color-white;
+
+    &:hover {
+        color: $color-accent-light;
     }
 }
 

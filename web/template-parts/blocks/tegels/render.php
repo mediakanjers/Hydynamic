@@ -99,10 +99,8 @@ $label  = $title ? wp_strip_all_tags($title) : __('Overzicht', 'mk');
         </ul>
 
         <?php if ($slider) : ?>
-            <div class="mk-tegels__nav">
-                <button type="button" class="mk-tegels__arrow js-slider-prev" aria-controls="<?php echo esc_attr($uid); ?>" aria-label="<?php esc_attr_e('Vorige', 'mk'); ?>"><?php echo hyd_icon('arrow-left', 20); ?></button>
-                <button type="button" class="mk-tegels__arrow js-slider-next" aria-controls="<?php echo esc_attr($uid); ?>" aria-label="<?php esc_attr_e('Volgende', 'mk'); ?>"><?php echo hyd_icon('arrow-right', 20); ?></button>
-            </div>
+            <button type="button" class="mk-tegels__arrow mk-tegels__arrow--prev js-slider-prev" aria-controls="<?php echo esc_attr($uid); ?>" aria-label="<?php esc_attr_e('Vorige', 'mk'); ?>"><?php echo hyd_icon('triangle-left', 24); ?></button>
+            <button type="button" class="mk-tegels__arrow mk-tegels__arrow--next js-slider-next" aria-controls="<?php echo esc_attr($uid); ?>" aria-label="<?php esc_attr_e('Volgende', 'mk'); ?>"><?php echo hyd_icon('triangle-right', 24); ?></button>
         </div>
         <?php endif; ?>
     </div>

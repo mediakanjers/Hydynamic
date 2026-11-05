@@ -45,7 +45,7 @@ $anchor = !empty($block['anchor']) ? ' id="' . esc_attr($block['anchor']) . '"' 
 
             <?php if ($variant === 'afbeelding' && $image) : ?>
                 <div class="mk-paginakop__media mk-photo">
-                    <?php echo hyd_image($image, 'hyd-section', ['loading' => 'eager', 'sizes' => '(min-width: 900px) 45vw, 100vw']); ?>
+                    <?php echo hyd_lightbox(hyd_image($image, 'hyd-section', ['loading' => 'eager', 'sizes' => '(min-width: 900px) 45vw, 100vw']), $image); ?>
                 </div>
             <?php endif; ?>
 

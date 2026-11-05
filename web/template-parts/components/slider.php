@@ -12,12 +12,13 @@ $sizes   = $args['sizes'] ?? '(min-width: 900px) 50vw, 100vw';
 $eager   = !empty($args['eager']);
 if (!$ids) return;
 $count = count($ids);
+$lightbox_group = 'slider-' . substr(md5(implode(',', $ids)), 0, 8);
 ?>
 <div class="mk-slider mk-slider--<?php echo esc_attr($variant); ?> js-slider" role="region" aria-roledescription="<?php esc_attr_e('carrousel', 'mk'); ?>" aria-label="<?php echo esc_attr($label); ?>">
     <div class="mk-slider__track js-slider-track" tabindex="0">
         <?php foreach ($ids as $i => $id) : ?>
             <figure class="mk-slider__slide" role="group" aria-roledescription="<?php esc_attr_e('dia', 'mk'); ?>" aria-label="<?php echo esc_attr(sprintf(__('%1$d van %2$d', 'mk'), $i + 1, $count)); ?>">
-                <?php echo hyd_image($id, $size, ['sizes' => $sizes, 'loading' => ($eager && $i === 0) ? 'eager' : 'lazy']); ?>
+                <?php echo hyd_lightbox(hyd_image($id, $size, ['sizes' => $sizes, 'loading' => ($eager && $i === 0) ? 'eager' : 'lazy']), $id, $lightbox_group); ?>
             </figure>
         <?php endforeach; ?>
     </div>

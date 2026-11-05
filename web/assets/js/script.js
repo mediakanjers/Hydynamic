@@ -413,7 +413,111 @@
         document.addEventListener('click', function () { setTimeout(update, 0); });
     }
 
+    /* ------------------------------------------------------------ lightbox */
+    // Opent foto's (a[data-lightbox] en afbeeldingen in kennisbankartikelen) groot.
+    // Foto's met dezelfde data-lightbox-groep zijn met pijlen, toetsen of swipe te doorlopen.
+    function initLightbox() {
+        document.querySelectorAll('.mk-article__body img').forEach(function (img) {
+            if (img.closest('a')) return;
+            var src = img.currentSrc || img.src;
+            if (img.srcset) {
+                var best = img.srcset.split(',').map(function (s) {
+                    var p = s.trim().split(/\s+/);
+                    return { u: p[0], w: parseInt(p[1], 10) || 0 };
+                }).sort(function (a, b) { return b.w - a.w; })[0];
+                if (best) src = best.u;
+            }
+            var a = document.createElement('a');
+            a.href = src;
+            a.className = 'mk-lightbox-link';
+            a.setAttribute('data-lightbox', 'artikel');
+            a.setAttribute('data-caption', img.alt || '');
+            img.parentNode.insertBefore(a, img);
+            a.appendChild(img);
+        });
+
+        if (!document.querySelector('a[data-lightbox]') || !window.HTMLDialogElement) return;
+        var t = cfg.i18n || {};
+        var dlg = document.createElement('dialog');
+        dlg.className = 'mk-lightbox';
+        dlg.setAttribute('aria-label', 'Lightbox');
+        dlg.innerHTML =
+            '<figure class="mk-lightbox__figure"><img class="mk-lightbox__img" alt=""><figcaption class="mk-lightbox__caption"></figcaption></figure>' +
+            '<p class="mk-lightbox__count" aria-live="polite"></p>' +
+            '<button type="button" class="mk-lightbox__close"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>' +
+            '<button type="button" class="mk-lightbox__nav mk-lightbox__nav--prev"><svg width="24" height="54" viewBox="0 0 24 54" fill="currentColor" aria-hidden="true"><path d="M24 0v54L0 27z"/></svg></button>' +
+            '<button type="button" class="mk-lightbox__nav mk-lightbox__nav--next"><svg width="24" height="54" viewBox="0 0 24 54" fill="currentColor" aria-hidden="true"><path d="M0 0v54l24-27z"/></svg></button>';
+        document.body.appendChild(dlg);
+        var img = dlg.querySelector('.mk-lightbox__img');
+        var cap = dlg.querySelector('.mk-lightbox__caption');
+        var count = dlg.querySelector('.mk-lightbox__count');
+        var prev = dlg.querySelector('.mk-lightbox__nav--prev');
+        var next = dlg.querySelector('.mk-lightbox__nav--next');
+        var closeBtn = dlg.querySelector('.mk-lightbox__close');
+        closeBtn.setAttribute('aria-label', t.close || 'Sluiten');
+        prev.setAttribute('aria-label', t.prev || 'Vorige foto');
+        next.setAttribute('aria-label', t.next || 'Volgende foto');
+        var group = [], index = 0, opener = null;
+
+        function show(i) {
+            index = (i + group.length) % group.length;
+            var a = group[index];
+            img.classList.remove('is-loaded');
+            img.onload = function () { img.classList.add('is-loaded'); };
+            img.src = a.href;
+            img.alt = a.getAttribute('data-caption') || '';
+            cap.textContent = a.getAttribute('data-caption') || '';
+            var multi = group.length > 1;
+            prev.hidden = next.hidden = !multi;
+            count.textContent = multi ? (t.of || '%1$d van %2$d').replace('%1$d', index + 1).replace('%2$d', group.length) : '';
+        }
+        function open(a) {
+            var name = a.getAttribute('data-lightbox');
+            group = Array.prototype.filter.call(document.querySelectorAll('a[data-lightbox]'), function (l) {
+                return l.getAttribute('data-lightbox') === name;
+            });
+            opener = a;
+            show(group.indexOf(a));
+            dlg.showModal();
+            document.body.classList.add('freeze');
+        }
+
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest('a[data-lightbox]');
+            if (!a || e.ctrlKey || e.metaKey || e.shiftKey) return;
+            e.preventDefault();
+            open(a);
+        });
+        prev.addEventListener('click', function () { show(index - 1); });
+        next.addEventListener('click', function () { show(index + 1); });
+        closeBtn.addEventListener('click', function () { dlg.close(); });
+        // Klik naast de foto sluit de lightbox
+        dlg.addEventListener('click', function (e) {
+            if (e.target === dlg || e.target.classList.contains('mk-lightbox__figure')) dlg.close();
+        });
+        dlg.addEventListener('close', function () {
+            document.body.classList.remove('freeze');
+            img.removeAttribute('src');
+            if (opener) opener.focus();
+        });
+        dlg.addEventListener('keydown', function (e) {
+            if (group.length < 2) return;
+            if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+        });
+        // Swipen op touch
+        var x0 = null;
+        dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+        dlg.addEventListener('touchend', function (e) {
+            if (x0 === null || group.length < 2) return;
+            var dx = e.changedTouches[0].clientX - x0;
+            if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+            x0 = null;
+        });
+    }
+
     ready(function () {
+        initLightbox();
         initUsp();
         initFloatOfferte();
         initToTop();

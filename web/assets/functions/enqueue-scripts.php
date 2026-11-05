@@ -16,6 +16,10 @@ add_action('wp_enqueue_scripts', function () {
             'results'    => __('%d suggesties beschikbaar', 'mk'),
             'menuOpen'   => __('Menu openen', 'mk'),
             'menuClose'  => __('Menu sluiten', 'mk'),
+            'close'      => __('Sluiten', 'mk'),
+            'prev'       => __('Vorige foto', 'mk'),
+            'next'       => __('Volgende foto', 'mk'),
+            'of'         => __('%1$d van %2$d', 'mk'),
         ],
     ]);
 }, 20);

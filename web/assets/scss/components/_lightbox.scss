@@ -1,0 +1,163 @@
+// =============================================================================
+// Lightbox (foto's groot bekijken)
+// =============================================================================
+
+.mk-lightbox-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: zoom-in;
+
+    &:focus-visible {
+        @include focus-ring;
+        outline-offset: -3px;
+    }
+}
+
+.mk-lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    max-height: none;
+    margin: 0;
+    padding: 56px 16px 72px;
+    border: 0;
+    background: rgba(14, 15, 24, 0.94);
+    color: $color-white;
+    overflow: hidden;
+
+    &::backdrop {
+        background: rgba(14, 15, 24, 0.6);
+    }
+
+    &[open] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: hyd-lightbox-in 0.25s ease both;
+    }
+
+    @include mq(md) {
+        padding: 64px 96px 80px;
+    }
+
+    &__figure {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+
+    &__img {
+        max-width: 100%;
+        max-height: calc(100% - 40px);
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        border-radius: 4px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+
+        &.is-loaded {
+            opacity: 1;
+        }
+    }
+
+    &__caption {
+        max-width: 760px;
+        font-size: 15px;
+        line-height: 1.5;
+        text-align: center;
+        color: #C9CEDC;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__count {
+        position: absolute;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: #C9CEDC;
+    }
+
+    &__close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        color: $color-white;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+    }
+
+    // Driehoekige pijlen, zoals bij de sliders
+    &__nav {
+        position: absolute;
+        top: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 80px;
+        margin-top: -40px;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: $color-white;
+        cursor: pointer;
+        opacity: 0.8;
+        transition: opacity $transition, color $transition;
+
+        &--prev { left: 8px; }
+        &--next { right: 8px; }
+
+        &:hover {
+            opacity: 1;
+            color: $color-accent-light;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+
+        &[hidden] {
+            display: none;
+        }
+
+        @include mq(md) {
+            &--prev { left: 28px; }
+            &--next { right: 28px; }
+        }
+    }
+}
+
+@keyframes hyd-lightbox-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
