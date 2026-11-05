@@ -20,6 +20,16 @@
           "color": "#164F8C"
         },
         {
+          "name": "Knopblauw",
+          "slug": "button",
+          "color": "#008EE9"
+        },
+        {
+          "name": "Knopblauw hover",
+          "slug": "button-hover",
+          "color": "#0071BA"
+        },
+        {
           "name": "Donkerblauw (tekst)",
           "slug": "secondary",
           "color": "#1C1D2B"
