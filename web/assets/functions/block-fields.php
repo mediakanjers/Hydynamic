@@ -109,9 +109,9 @@ function hyd_block_definitions() {
             hyd_f_title('h2'),
             [
                 ['name' => 'intro', 'label' => 'Introtekst', 'type' => 'textarea', 'rows' => 3, 'new_lines' => 'br'],
-                ['name' => 'bron', 'label' => 'Tegels', 'type' => 'button_group', 'choices' => ['handmatig' => 'Handmatig invullen', 'onderliggend' => 'Alle onderliggende pagina’s'], 'default_value' => 'handmatig',
+                ['name' => 'bron', 'label' => 'Tegels', 'type' => 'button_group', 'choices' => ['handmatig' => 'Handmatig invullen', 'onderliggend' => 'Alle onderliggende pagina’s'], 'default_value' => 'onderliggend',
                  'instructions' => '"Alle onderliggende pagina’s" toont automatisch alle producten/pagina’s onder deze pagina (of onder de gekozen pagina), met de tegeltekst en tegelfoto die je bij elk product invult. Nieuwe producten verschijnen vanzelf.', 'wrapper' => ['width' => 50]],
-                ['name' => 'weergave', 'label' => 'Weergave', 'type' => 'button_group', 'choices' => ['raster' => 'Raster', 'slider' => 'Slider met pijlen'], 'default_value' => 'raster', 'wrapper' => ['width' => 50]],
+                ['name' => 'weergave', 'label' => 'Weergave', 'type' => 'button_group', 'choices' => ['raster' => 'Raster', 'slider' => 'Slider met pijlen'], 'default_value' => 'slider', 'wrapper' => ['width' => 50]],
                 ['name' => 'bron_ouder', 'label' => 'Onderliggend aan', 'type' => 'post_object', 'post_type' => ['producten', 'oplossingen', 'diensten', 'page'], 'return_format' => 'id', 'allow_null' => 1, 'ui' => 1,
                  'instructions' => 'Leeg = de huidige pagina.', 'cond' => ['bron', 'onderliggend']],
                 ['name' => 'kolommen', 'label' => 'Tegels per rij (desktop)', 'type' => 'button_group', 'choices' => ['3' => '3', '4' => '4'], 'default_value' => '4', 'wrapper' => ['width' => 50]],

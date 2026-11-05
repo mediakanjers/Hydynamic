@@ -12,8 +12,9 @@ $tag      = hyd_heading_tag(get_field('kopniveau'), 'h2');
 $cols     = get_field('kolommen') ?: '4';
 $linktext = get_field('linktekst');
 $intro    = get_field('intro');
-$source   = get_field('bron') ?: 'handmatig';
-$slider   = get_field('weergave') === 'slider';
+// Standaard: slider met alle onderliggende pagina's (zonder onderliggende pagina's: de handmatige tegels)
+$source   = get_field('bron') ?: 'onderliggend';
+$slider   = (get_field('weergave') ?: 'slider') === 'slider';
 $tile_tag = ($title && $tag === 'h3') ? 'h4' : 'h3';
 
 $tiles = [];
@@ -46,6 +47,9 @@ if (!$tiles) {
     if ($is_preview ?? false) echo '<p class="mk-block-empty">Klikbare tegels: voeg tegels toe of kies "Alle onderliggende pagina’s".</p>';
     return;
 }
+
+// Slider alleen als er meer tegels zijn dan er op één rij passen (bij 4 per rij: vanaf 5)
+if ($slider && count($tiles) <= (int) $cols) $slider = false;
 
 $uid    = 'tegels-' . substr(md5(($block['id'] ?? '') . serialize(array_column($tiles, 'titel'))), 0, 6);
 $extra  = $slider ? ['mk-tegels--slider'] : [];
