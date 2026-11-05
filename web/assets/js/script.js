@@ -240,7 +240,7 @@
             var next = slider.querySelector('.js-slider-next');
             var counter = slider.querySelector('.js-slider-counter');
             if (!track || slides.length < 2) return;
-            var loop = !slider.classList.contains('mk-slider--gallery');
+            var loop = slider.classList.contains('mk-slider--photo'); // productfoto's rondlopend, tegels/galerij niet
 
             function step() {
                 var s = slides[0];
@@ -251,6 +251,8 @@
             function maxScroll() { return track.scrollWidth - track.clientWidth - 2; }
 
             function update() {
+                // Geen overloop (alle tegels passen): pijlen verbergen
+                slider.classList.toggle('is-static', track.scrollWidth <= track.clientWidth + 2);
                 if (counter) counter.textContent = (Math.min(index(), slides.length - 1) + 1) + ' / ' + slides.length;
                 if (!loop) {
                     if (prev) prev.disabled = track.scrollLeft <= 2;
@@ -277,6 +279,7 @@
                 raf = requestAnimationFrame(update);
             }, { passive: true });
             update();
+            window.addEventListener('resize', update);
         });
     }
 

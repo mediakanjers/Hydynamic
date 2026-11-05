@@ -350,6 +350,7 @@ foreach ($CATS as $slug => [$title, $children]) {
     $c = 0;
     foreach ($children as $cslug => $child) {
         $PROD_IDS[$cslug] = upsert('producten', $cslug, $child[0], '', ['parent' => $CAT_IDS[$slug], 'order' => $c++, 'thumb' => $child[1] ? hyd_media($child[1]) : 0]);
+        update_field('hyd_tegeltekst', $child[2], $PROD_IDS[$cslug]); // tegeltekst in de categorieslider
     }
 }
 
@@ -441,7 +442,7 @@ function cat_tiles($slug) {
 $intro_hydr = 'Slang, fitting en perskoppeling uit één hand: Danfoss merken en een eigen productlijn, desgewenst geleverd als gecertificeerde slangassemblage.';
 upsert('producten', 'hydrauliekslangen-koppelingen', 'Hydrauliekslangen en koppelingen', blocks([
     ['paginakop', ['variant' => 'tekst', 'titel' => 'Hydrauliek slangen en koppelingen', 'accent' => 'koppelingen', 'intro' => "<p>$intro_hydr</p>"]],
-    ['tegels', ['kolommen' => '4', 'linktekst' => 'Bekijk producten', 'tegels' => cat_tiles('hydrauliekslangen-koppelingen'), 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
+    ['tegels', ['kolommen' => '4', 'linktekst' => 'Bekijk producten', 'bron' => 'onderliggend', 'weergave' => 'slider', 'tegels' => [['afbeelding' => hyd_media('tile-flexmaster'), 'titel' => 'Flexmaster', 'tekst' => 'Pijp en buiskoppelingen voor lagerdruk, die trillingen en uitlijning opvangen.', 'link' => link_to($PROD_IDS['hydrauliekslangen'], 'Flexmaster')]], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['downloads', ['label' => 'Downloads', 'bestanden' => [
         ['titel' => 'Danfoss Hydraulic Hoses', 'bestand' => $PDF['danfoss-kat']], ['titel' => 'Danfoss Reusable Fittings', 'bestand' => $PDF['reusable']], ['titel' => 'Danfoss A/C and Refrigeration', 'bestand' => $PDF['danfoss-ac']],
         ['titel' => 'Danfoss flexmaster A/C', 'bestand' => $PDF['flexmaster']], ['titel' => 'Danfoss A/C and Refrigeration parts', 'bestand' => ''],
@@ -476,7 +477,7 @@ $TXT_STARTKLAAR = ['titel' => 'Direct startklaar geleverd', 'accent' => 'gelever
 
 upsert('producten', 'centrale-smering', 'Centrale smering', blocks([
     ['paginakop', ['variant' => 'tekst', 'titel' => 'Centrale smering', 'intro' => "<p>$intro_cs</p>"]],
-    ['tegels', ['kolommen' => '4', 'linktekst' => 'Bekijk producten', 'tegels' => cat_tiles('centrale-smering'), 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
+    ['tegels', ['kolommen' => '4', 'linktekst' => 'Bekijk producten', 'bron' => 'onderliggend', 'weergave' => 'slider', 'tegels' => [], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['downloads', ['label' => 'Downloads', 'bestanden' => [['titel' => 'Hydynamic productcatalogus 2026', 'bestand' => $PDF['catalogus']], ['titel' => 'Zoutsproeitest zink nikkel (ZnNi)', 'bestand' => $PDF['zoutspray']]], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['usp-balk', ['stijl' => 'donker', 'items' => usp(['Eigen ontwikkeling en productie', 'Productie naar tekening of monster', 'Standaard ZnNi oppervlaktebehandeling', 'Voorgevuld met vet leverbaar'])]],
     ['tekst-afbeelding', [
@@ -493,7 +494,7 @@ upsert('producten', 'centrale-smering', 'Centrale smering', blocks([
 $intro_ind = 'Hydynamic levert industriële koppelingen en industriële slangen voor het verbinden en verplaatsen van vloeistoffen en andere media, binnen diverse sectoren: zuivelkoppelingen, Storz koppelingen, camlockkoppelingen, tankwagenkoppelingen, spiraalslangen en industriële slangen.';
 upsert('producten', 'industrieel', 'Industrieel', blocks([
     ['paginakop', ['variant' => 'tekst', 'titel' => 'Industrieel', 'intro' => "<p>$intro_ind</p>"]],
-    ['tegels', ['kolommen' => '4', 'linktekst' => 'Bekijk producten', 'tegels' => cat_tiles('industrieel'), 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
+    ['tegels', ['kolommen' => '4', 'linktekst' => 'Bekijk producten', 'bron' => 'onderliggend', 'weergave' => 'slider', 'tegels' => [], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['downloads', ['label' => 'Downloads', 'bestanden' => [['titel' => 'Hydynamic productcatalogus 2026', 'bestand' => $PDF['catalogus']]], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['usp-balk', ['stijl' => 'donker', 'items' => usp(['Eigen productlijn onder Hydynamic merknaam', 'Zuivelkoppelingen conform DIN 11851 en DIN 11853', 'Actief sinds 1997', 'ISO 9001 gecertificeerd'])]],
     ['tekst-afbeelding', [

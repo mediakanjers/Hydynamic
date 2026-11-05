@@ -128,3 +128,99 @@
 .is-dark .mk-tile__title {
     color: $color-secondary;
 }
+
+// -----------------------------------------------------------------------------
+// Slider-weergave (bijv. alle producten onder een categorie)
+// -----------------------------------------------------------------------------
+
+.mk-tegels--slider {
+    .mk-tegels__grid {
+        --tile-gap: 16px;
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        grid-auto-columns: minmax(260px, 80%);
+        gap: var(--tile-gap);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        margin: 0 calc(#{$custom-gutter} * -1);
+        padding: 4px $custom-gutter 20px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &:focus-visible {
+            @include focus-ring;
+        }
+
+        @include mq(sm) {
+            --tile-gap: 20px;
+            grid-auto-columns: calc((100% - var(--tile-gap)) / 2);
+            margin: 0;
+            padding: 4px 0 20px;
+        }
+
+        @include mq(lg) {
+            --tile-gap: clamp(20px, 2vw, 38px);
+
+            &--3 { grid-auto-columns: calc((100% - 2 * var(--tile-gap)) / 3); }
+            &--4 { grid-auto-columns: calc((100% - 3 * var(--tile-gap)) / 4); }
+        }
+    }
+}
+
+// Pijlknoppen (stijlgids: 48×48, vierkant, primair blauw)
+.mk-tegels__nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 16px;
+
+    .is-static & {
+        display: none;
+    }
+}
+
+.mk-tegels__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: 0;
+    background: $color-primary;
+    color: $color-white;
+    cursor: pointer;
+    transition: background-color $transition, opacity $transition;
+
+    &:hover {
+        background: $color-primary-hover;
+    }
+
+    &:focus-visible {
+        @include focus-ring;
+    }
+
+    &[disabled] {
+        opacity: 0.35;
+        cursor: default;
+    }
+}
+
+// Tegel zonder foto: huisstijlvlak met het H-element
+.mk-tile__image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $gradient-blue;
+
+    img {
+        width: 130%;
+        max-width: none;
+        height: auto;
+        object-fit: contain;
+    }
+}

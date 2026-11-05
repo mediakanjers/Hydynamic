@@ -26,7 +26,7 @@ $anchor = !empty($block['anchor']) ? ' id="' . esc_attr($block['anchor']) . '"' 
         </div>
     <?php endif; ?>
     <?php if ($lines) : ?>
-        <img class="mk-paginakop__lines" src="<?php echo esc_url(hyd_brand_asset('achtergrond-h-lijnen.svg')); ?>" alt="" aria-hidden="true" width="1500" height="880">
+        <img class="mk-paginakop__lines" src="<?php echo esc_url(hyd_brand_asset('logo-element-licht.svg')); ?>" alt="" aria-hidden="true" width="1837" height="856">
     <?php endif; ?>
 
     <div class="mk-container">

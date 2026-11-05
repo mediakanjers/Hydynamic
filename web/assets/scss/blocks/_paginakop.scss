@@ -19,18 +19,17 @@
 
     &__lines {
         position: absolute;
-        top: -40px;
-        left: 42%;
-        width: 1500px;
+        top: -3.1vw;
+        left: 46.9%;
+        width: 60.5vw;
         max-width: none;
         height: auto;
         pointer-events: none;
-        opacity: 0.8;
 
         @include mq-down(md) {
-            left: 20%;
-            width: 900px;
-            opacity: 0.5;
+            top: -10px;
+            left: 30%;
+            width: 120vw;
         }
     }
 

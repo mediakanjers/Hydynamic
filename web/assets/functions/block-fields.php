@@ -109,9 +109,14 @@ function hyd_block_definitions() {
             hyd_f_title('h2'),
             [
                 ['name' => 'intro', 'label' => 'Introtekst', 'type' => 'textarea', 'rows' => 3, 'new_lines' => 'br'],
+                ['name' => 'bron', 'label' => 'Tegels', 'type' => 'button_group', 'choices' => ['handmatig' => 'Handmatig invullen', 'onderliggend' => 'Alle onderliggende pagina’s'], 'default_value' => 'handmatig',
+                 'instructions' => '"Alle onderliggende pagina’s" toont automatisch alle producten/pagina’s onder deze pagina (of onder de gekozen pagina), met de tegeltekst en tegelfoto die je bij elk product invult. Nieuwe producten verschijnen vanzelf.', 'wrapper' => ['width' => 50]],
+                ['name' => 'weergave', 'label' => 'Weergave', 'type' => 'button_group', 'choices' => ['raster' => 'Raster', 'slider' => 'Slider met pijlen'], 'default_value' => 'raster', 'wrapper' => ['width' => 50]],
+                ['name' => 'bron_ouder', 'label' => 'Onderliggend aan', 'type' => 'post_object', 'post_type' => ['producten', 'oplossingen', 'diensten', 'page'], 'return_format' => 'id', 'allow_null' => 1, 'ui' => 1,
+                 'instructions' => 'Leeg = de huidige pagina.', 'cond' => ['bron', 'onderliggend']],
                 ['name' => 'kolommen', 'label' => 'Tegels per rij (desktop)', 'type' => 'button_group', 'choices' => ['3' => '3', '4' => '4'], 'default_value' => '4', 'wrapper' => ['width' => 50]],
                 ['name' => 'linktekst', 'label' => 'Linktekst onder elke tegel', 'type' => 'text', 'default_value' => 'Bekijk producten', 'wrapper' => ['width' => 50]],
-                ['name' => 'tegels', 'label' => 'Tegels', 'type' => 'repeater', 'layout' => 'block', 'button_label' => 'Tegel toevoegen', 'collapsed' => 'field_hyd_tegels_tegels_titel', 'sub_fields' => [
+                ['name' => 'tegels', 'label' => 'Tegels (handmatig / extra)', 'instructions' => 'Bij "Alle onderliggende pagina’s" worden deze tegels achter de automatische tegels geplaatst.', 'type' => 'repeater', 'layout' => 'block', 'button_label' => 'Tegel toevoegen', 'collapsed' => 'field_hyd_tegels_tegels_titel', 'sub_fields' => [
                     ['name' => 'afbeelding', 'label' => 'Afbeelding', 'type' => 'image', 'return_format' => 'id', 'preview_size' => 'thumbnail', 'wrapper' => ['width' => 25]],
                     ['name' => 'titel', 'label' => 'Titel', 'type' => 'text', 'wrapper' => ['width' => 35]],
                     ['name' => 'link', 'label' => 'Doellink', 'type' => 'link', 'instructions' => 'Pagina waar de tegel naartoe linkt.', 'wrapper' => ['width' => 40]],
@@ -293,6 +298,28 @@ add_action('acf/include_fields', function () {
             'active'   => true,
         ]);
     }
+});
+
+// Tegelgegevens per product/oplossing/dienst (gebruikt door "Alle onderliggende pagina's")
+add_action('acf/include_fields', function () {
+    if (!function_exists('acf_add_local_field_group')) return;
+    acf_add_local_field_group([
+        'key'      => 'group_hyd_tegel',
+        'title'    => 'Tegel (overzichten)',
+        'fields'   => [
+            ['key' => 'field_hyd_tegeltekst', 'label' => 'Tegeltekst (1 à 2 regels)', 'name' => 'hyd_tegeltekst', 'type' => 'textarea', 'rows' => 3, 'maxlength' => 160, 'new_lines' => '',
+             'instructions' => 'Korte omschrijving op de tegel in het overzicht van de bovenliggende pagina.'],
+            ['key' => 'field_hyd_tegelafbeelding', 'label' => 'Tegelfoto', 'name' => 'hyd_tegelafbeelding', 'type' => 'image', 'return_format' => 'id', 'preview_size' => 'thumbnail',
+             'instructions' => 'Leeg = de uitgelichte afbeelding.'],
+        ],
+        'location' => [
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'producten']],
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'oplossingen']],
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'diensten']],
+        ],
+        'position' => 'side',
+        'active'   => true,
+    ]);
 });
 
 // Gravity Forms-keuzelijst in het offerteblok en de instellingen vullen

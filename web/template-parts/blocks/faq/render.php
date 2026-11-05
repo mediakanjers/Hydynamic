@@ -17,7 +17,7 @@ if (!$items) {
 $uid = 'faq-' . substr(md5(($block['id'] ?? '') . $title), 0, 6);
 ?>
 <section <?php echo hyd_section_attrs($block, 'mk-faq', 'donker'); ?>>
-    <img class="mk-faq__lines" src="<?php echo esc_url(hyd_brand_asset('achtergrond-h-lijnen.svg')); ?>" alt="" aria-hidden="true" width="1500" height="880">
+    <img class="mk-faq__lines" src="<?php echo esc_url(hyd_brand_asset('logo-element.svg')); ?>" alt="" aria-hidden="true" width="1837" height="856">
     <div class="mk-container mk-container--faq">
         <h2 class="mk-label-head mk-faq__title" id="<?php echo esc_attr($uid); ?>"><?php echo esc_html($title); ?></h2>
         <div class="mk-faq__list" aria-labelledby="<?php echo esc_attr($uid); ?>">

@@ -19,7 +19,7 @@ $open     = hyd_is_open_now();
 $subline_html = preg_replace('/\b(vrijblijvend|no-obligation)\b/u', '<span class="mk-offerte__green">$1</span>', esc_html($subline), 1);
 ?>
 <section class="mk-section mk-bg--contact mk-space--normaal mk-offerte mk-offerte--<?php echo esc_attr($side); ?><?php echo !empty($block['className']) ? ' ' . esc_attr($block['className']) : ''; ?>" id="offerte" aria-labelledby="offerte-titel" tabindex="-1">
-    <img class="mk-offerte__lines" src="<?php echo esc_url(hyd_brand_asset('achtergrond-h-lijnen.svg')); ?>" alt="" aria-hidden="true" width="1300" height="760">
+    <img class="mk-offerte__lines" src="<?php echo esc_url(hyd_brand_asset('logo-element-licht.svg')); ?>" alt="" aria-hidden="true" width="1837" height="856">
     <div class="mk-container mk-offerte__layout">
         <div class="mk-offerte__intro">
             <h2 class="mk-offerte__title" id="offerte-titel"><?php echo hyd_title_html($title, $accent); ?></h2>

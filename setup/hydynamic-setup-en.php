@@ -246,9 +246,10 @@ $CATS = [
 $CAT = []; $PROD = []; $NLPROD = [];
 foreach ($CATS as $nl_slug => [$slug, $title, $children]) {
     $CAT[$slug] = en('producten', nl('producten', $nl_slug), $slug, $title, '');
-    foreach ($children as $nl_child => [$cslug, $ctitle]) {
+    foreach ($children as $nl_child => [$cslug, $ctitle, $cimg, $ctext]) {
         $NLPROD[$cslug] = nl('producten', "$nl_slug/$nl_child");
         $PROD[$cslug]   = en('producten', $NLPROD[$cslug], $cslug, $ctitle, '', ['parent' => $CAT[$slug]]);
+        if ($PROD[$cslug]) update_field('hyd_tegeltekst', $ctext, $PROD[$cslug]); // tegeltekst in de categorieslider
     }
 }
 
@@ -329,7 +330,7 @@ $FAQ_BLOCK = ['faq', ['titel' => 'Frequently asked questions', 'vragen' => $FAQ,
 $intro_hyd = 'Hose, fitting and crimp coupling from a single source: Danfoss brands and our own product line, supplied as a certified hose assembly if required.';
 en('producten', nl('producten', 'hydrauliekslangen-koppelingen'), 'hydraulic-hoses-couplings', 'Hydraulic hoses and couplings', blocks([
     ['paginakop', ['variant' => 'tekst', 'titel' => 'Hydraulic hoses and couplings', 'accent' => 'couplings', 'intro' => "<p>$intro_hyd</p>"]],
-    ['tegels', ['kolommen' => '4', 'linktekst' => 'View products', 'tegels' => cat_tiles('hydraulic-hoses-couplings'), 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
+    ['tegels', ['kolommen' => '4', 'linktekst' => 'View products', 'bron' => 'onderliggend', 'weergave' => 'slider', 'tegels' => [['afbeelding' => media('tile-flexmaster'), 'titel' => 'Flexmaster', 'tekst' => 'Pipe and tube couplings for low pressure that absorb vibration and misalignment.', 'link' => link_to($PROD['hydraulic-hoses'], 'Flexmaster')]], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['downloads', ['label' => 'Downloads', 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend', 'bestanden' => [
         ['titel' => 'Danfoss Hydraulic Hoses', 'bestand' => $PDF['danfoss-kat']], ['titel' => 'Danfoss Reusable Fittings', 'bestand' => $PDF['reusable']],
         ['titel' => 'Danfoss A/C and Refrigeration', 'bestand' => $PDF['danfoss-ac']], ['titel' => 'Danfoss flexmaster A/C', 'bestand' => $PDF['flexmaster']],
@@ -351,7 +352,7 @@ en('producten', nl('producten', 'hydrauliekslangen-koppelingen'), 'hydraulic-hos
 $intro_cs = 'Hydynamic develops and produces components for central lubrication systems. The range consists of polyamide tubes, push-in connectors, grease nipples and parts for nipple blocks and distribution blocks, supplemented with mounting and protection materials.';
 en('producten', nl('producten', 'centrale-smering'), 'central-lubrication', 'Central lubrication', blocks([
     ['paginakop', ['variant' => 'tekst', 'titel' => 'Central lubrication', 'intro' => "<p>$intro_cs</p>"]],
-    ['tegels', ['kolommen' => '4', 'linktekst' => 'View products', 'tegels' => cat_tiles('central-lubrication'), 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
+    ['tegels', ['kolommen' => '4', 'linktekst' => 'View products', 'bron' => 'onderliggend', 'weergave' => 'slider', 'tegels' => [], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['downloads', ['label' => 'Downloads', 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend', 'bestanden' => [
         ['titel' => 'Hydynamic product catalogue 2026', 'bestand' => $PDF['catalogus']], ['titel' => 'Salt spray test zinc nickel (ZnNi)', 'bestand' => $PDF['zoutspray']]]]],
     ['usp-balk', ['stijl' => 'donker', 'items' => $USP_CS]],
@@ -365,7 +366,7 @@ en('producten', nl('producten', 'centrale-smering'), 'central-lubrication', 'Cen
 $intro_ind = 'Hydynamic supplies industrial couplings and industrial hoses for connecting and transferring liquids and other media in various sectors: dairy couplings, Storz couplings, camlock couplings, tanker couplings, spiral hoses and industrial hoses.';
 en('producten', nl('producten', 'industrieel'), 'industrial', 'Industrial', blocks([
     ['paginakop', ['variant' => 'tekst', 'titel' => 'Industrial', 'intro' => "<p>$intro_ind</p>"]],
-    ['tegels', ['kolommen' => '4', 'linktekst' => 'View products', 'tegels' => cat_tiles('industrial'), 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
+    ['tegels', ['kolommen' => '4', 'linktekst' => 'View products', 'bron' => 'onderliggend', 'weergave' => 'slider', 'tegels' => [], 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend']],
     ['downloads', ['label' => 'Downloads', 'achtergrond' => 'grijs', 'ruimte' => 'aansluitend', 'bestanden' => [['titel' => 'Hydynamic product catalogue 2026', 'bestand' => $PDF['catalogus']]]]],
     ['usp-balk', ['stijl' => 'donker', 'items' => $USP_IND]],
     ['tekst-afbeelding', ['titel' => 'Sectors and applications', 'accent' => 'applications', 'kopniveau' => 'h2',

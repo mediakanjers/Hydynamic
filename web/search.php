@@ -15,7 +15,7 @@ $labels = [
 ?>
 <main id="main-content" class="vervolgpagina" tabindex="-1">
 	<section class="mk-section mk-bg--pagina mk-paginakop mk-paginakop--compact">
-		<img class="mk-paginakop__lines" src="<?php echo esc_url(hyd_brand_asset('achtergrond-h-lijnen.svg')); ?>" alt="" aria-hidden="true" width="1500" height="880">
+		<img class="mk-paginakop__lines" src="<?php echo esc_url(hyd_brand_asset('logo-element-licht.svg')); ?>" alt="" aria-hidden="true" width="1837" height="856">
 		<div class="mk-container">
 			<?php echo hyd_breadcrumbs(); ?>
 			<div class="mk-paginakop__text">
