@@ -11,10 +11,10 @@
 
     &__lines {
         position: absolute;
-        // Schaalt mee met het scherm (op 1920px: ±1000px breed, linksonder)
-        left: -21vw;
-        top: 9vw;
-        width: 52vw;
+        // Groot linksonder, loopt deels buiten beeld; schaalt mee met het scherm
+        left: -18vw;
+        bottom: -5vw;
+        width: 66vw;
         max-width: none;
         height: auto;
         pointer-events: none;
