@@ -28,11 +28,11 @@
         font-size: $font-size-normal;
         line-height: $line-height-normal;
 
-        // Subkopjes in de tekst ("Hydrauliekslangen:") in primair blauw
+        // Subkopjes in de tekst ("Hydrauliekslangen:") in lichter accentblauw
         strong:first-child:not(:only-child),
         h3,
         h4 {
-            color: $color-primary;
+            color: $color-accent;
             font-weight: 600;
             font-size: inherit;
         }
