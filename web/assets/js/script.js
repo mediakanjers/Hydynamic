@@ -336,6 +336,23 @@
             item._done = setTimeout(finish, DURATION + 60); // vangnet als 'finish' niet afgaat
         }
 
+        // H-lijnen vastzetten op het midden van de dichte FAQ, zodat ze niet
+        // meeschuiven als een antwoord openklapt en de sectie hoger wordt
+        function pinLines() {
+            document.querySelectorAll('.mk-faq').forEach(function (faq) {
+                var lines = faq.querySelector('.mk-faq__lines');
+                if (!lines || faq.querySelector('.mk-faq__item[open]')) return;
+                lines.style.top = Math.round(faq.offsetHeight / 2) + 'px';
+            });
+        }
+        pinLines();
+        window.addEventListener('load', pinLines);
+        var pinTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(pinTimer);
+            pinTimer = setTimeout(pinLines, 150);
+        });
+
         document.querySelectorAll('.mk-faq__list').forEach(function (list) {
             list.querySelectorAll('.mk-faq__item').forEach(function (item) {
                 var summary = item.querySelector('summary');
