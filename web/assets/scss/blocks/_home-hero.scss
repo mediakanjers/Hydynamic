@@ -141,3 +141,47 @@
         }
     }
 }
+
+// -----------------------------------------------------------------------------
+// Infaden bij het laden: titel eerst, daarna de tegels één voor één
+// ("verminderde beweging" in het systeem: direct zichtbaar, zie _theme.scss)
+// -----------------------------------------------------------------------------
+
+@keyframes hyd-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mk-home-hero__title {
+    animation: hyd-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.1s backwards;
+}
+
+.mk-home-tile {
+    animation: hyd-fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards; // 'backwards': hover-effect blijft werken
+
+    @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{0.45s + ($i - 1) * 0.2s}; // van links naar rechts
+        }
+    }
+}
+
+// In de blokeditor en bij "verminderde beweging": geen animatie
+.editor-styles-wrapper .mk-home-hero__title,
+.editor-styles-wrapper .mk-home-tile {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mk-home-hero__title,
+    .mk-home-tile {
+        animation: none;
+    }
+}
