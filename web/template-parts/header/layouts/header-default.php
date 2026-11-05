@@ -21,7 +21,7 @@ if (is_front_page()) $header_classes[] = 'mk-header--overlay';
                 <?php echo hyd_icon('search', 26); ?>
             </button>
 
-            <?php echo hyd_button(__('Offerte aanvragen', 'mk'), hyd_offerte_url(), ['size' => 'small', 'offerte' => true, 'class' => 'mk-header__cta']); ?>
+            <?php echo hyd_button(__('Offerte aanvragen', 'mk'), hyd_offerte_page_url(), ['size' => 'small', 'class' => 'mk-header__cta']); ?>
 
             <?php get_template_part('template-parts/header/lang-switcher'); ?>
 

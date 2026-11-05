@@ -11,7 +11,7 @@
         ]);
         ?>
         <div class="mk-nav__mobile-extra">
-            <?php echo hyd_button(__('Offerte aanvragen', 'mk'), hyd_offerte_url(), ['offerte' => true, 'class' => 'mk-nav__cta']); ?>
+            <?php echo hyd_button(__('Offerte aanvragen', 'mk'), hyd_offerte_page_url(), ['class' => 'mk-nav__cta']); ?>
             <a class="mk-nav__phone" href="<?php echo esc_attr(hyd_tel_href(hyd_company('telefoon'))); ?>"><?php echo hyd_icon('phone', 18); ?><?php echo esc_html(hyd_company('telefoon')); ?></a>
         </div>
     </div>

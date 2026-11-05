@@ -274,3 +274,9 @@ function hyd_lightbox($image_html, $id, $group = '') {
          . ' data-caption="' . esc_attr($alt) . '" aria-label="' . esc_attr(sprintf(__('Foto vergroten: %s', 'mk'), $alt ?: get_the_title($id))) . '">'
          . $image_html . '</a>';
 }
+
+/** URL van de offertepagina (/offerte-aanvragen/ of /request-a-quote/ op hydynamic.com). */
+function hyd_offerte_page_url() {
+    $page = function_exists('hyd_opt') ? hyd_opt('offerte_fallback') : null;
+    return $page ? get_permalink($page) : home_url(function_exists('hyd_is_en') && hyd_is_en() ? '/request-a-quote/' : '/offerte-aanvragen/');
+}
