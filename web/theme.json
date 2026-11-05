@@ -12,12 +12,12 @@
         {
           "name": "Primair blauw",
           "slug": "primary",
-          "color": "#1F6FC4"
+          "color": "#008EE9"
         },
         {
           "name": "Primair blauw hover",
           "slug": "primary-hover",
-          "color": "#164F8C"
+          "color": "#0071BA"
         },
         {
           "name": "Knopblauw",
@@ -413,7 +413,7 @@
       },
       "link": {
         "color": {
-          "text": "#1F6FC4"
+          "text": "#008EE9"
         }
       }
     }
