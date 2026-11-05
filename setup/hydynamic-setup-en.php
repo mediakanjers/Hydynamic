@@ -98,6 +98,7 @@ function en($type, $nl_id, $slug, $title, $content, $args = []) {
 
     update_post_meta($id, '_hyd_lang', 'en');
     update_post_meta($id, '_hyd_group', $group);
+    update_post_meta($id, '_hyd_src_modified', get_post_field('post_modified_gmt', $nl_id)); // vertaling is bij
     $thumb = $args['thumb'] ?? get_post_thumbnail_id($nl_id);
     if ($thumb) set_post_thumbnail($id, $thumb);
     if (!empty($args['metadesc'])) update_post_meta($id, '_yoast_wpseo_metadesc', $args['metadesc']);

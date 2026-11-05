@@ -38,6 +38,10 @@ function hyd_lang_metabox($post) {
         echo '<p><strong>' . esc_html($cfg['label']) . '</strong><br>';
         if ($tid) {
             echo '<a href="' . esc_url(get_edit_post_link($tid)) . '">' . esc_html(get_the_title($tid)) . '</a> <span style="color:#646970">(' . esc_html(get_post_status($tid)) . ')</span>';
+            // Nederlandse pagina: loopt de vertaling achter?
+            if ($lang === 'nl' && hyd_translation_outdated($tid)) {
+                echo '<br><span style="display:inline-block;margin-top:6px;padding:4px 8px;border-radius:3px;background:#fcf0e3;color:#8a4b00">⚠ Deze pagina is gewijzigd na de laatste update van de ' . esc_html(strtolower($cfg['label'])) . 'e vertaling.</span>';
+            }
         } elseif ($post->post_status !== 'auto-draft') {
             $url = wp_nonce_url(admin_url('admin-post.php?action=hyd_translate&post=' . $post->ID . '&lang=' . $code), 'hyd_translate_' . $post->ID);
             echo '<a class="button" href="' . esc_url($url) . '">' . esc_html($cfg['label']) . 'e vertaling maken</a>';
@@ -47,7 +51,58 @@ function hyd_lang_metabox($post) {
         }
         echo '</p>';
     }
+
+    // Vertaling: melding als het Nederlandse origineel nieuwer is
+    if ($lang !== 'nl' && ($src = hyd_translation($post, 'nl')) && hyd_translation_outdated($post->ID)) {
+        $done = wp_nonce_url(admin_url('admin-post.php?action=hyd_mark_synced&post=' . $post->ID), 'hyd_mark_synced_' . $post->ID);
+        echo '<div style="margin-top:8px;padding:10px 12px;border-left:4px solid #dba617;background:#fcf9e8">';
+        echo '<strong>Vertaling verouderd</strong><br>';
+        echo 'Het Nederlandse origineel is gewijzigd op ' . esc_html(get_post_modified_time('j F Y \o\m H:i', false, $src, true)) . ', na de laatste update van deze vertaling.<br>';
+        echo '<a href="' . esc_url(get_edit_post_link($src)) . '" target="_blank">Nederlandse versie bekijken</a>';
+        $revisions = wp_get_post_revisions($src, ['numberposts' => 1]);
+        if ($revisions) {
+            echo ' · <a href="' . esc_url(admin_url('revision.php?revision=' . array_key_first($revisions))) . '" target="_blank">wijzigingen vergelijken</a>';
+        }
+        echo '<br><span class="description">Opslaan van deze vertaling haalt de melding weg.</span> ';
+        echo '<a class="button button-small" style="margin-top:6px" href="' . esc_url($done) . '">Markeer als bijgewerkt</a>';
+        echo '</div>';
+    }
 }
+
+/* -------------------------------------------------------------------------
+ * Vertaling verouderd?
+ * Op een vertaling wordt bij elke opslag vastgelegd welke versie (wijzigdatum)
+ * van het Nederlandse origineel is gevolgd: _hyd_src_modified.
+ * ---------------------------------------------------------------------- */
+
+function hyd_translation_outdated($translation_id) {
+    if (hyd_post_lang($translation_id) === 'nl') return false;
+    $src = hyd_translation($translation_id, 'nl');
+    if (!$src) return false;
+    $followed = get_post_meta($translation_id, '_hyd_src_modified', true) ?: get_post_field('post_modified_gmt', $translation_id);
+    return strtotime(get_post_field('post_modified_gmt', $src)) > strtotime($followed) + 5;
+}
+
+function hyd_mark_synced($translation_id) {
+    $src = hyd_translation($translation_id, 'nl');
+    if ($src) update_post_meta($translation_id, '_hyd_src_modified', get_post_field('post_modified_gmt', $src));
+}
+
+// Opslaan van een vertaling (blokeditor of klassiek) = bijgewerkt
+add_action('wp_after_insert_post', function ($post_id, $post) {
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) return;
+    if (!in_array($post->post_type, hyd_translatable_types(), true)) return;
+    if (hyd_post_lang($post_id) !== 'nl') hyd_mark_synced($post_id);
+}, 10, 2);
+
+add_action('admin_post_hyd_mark_synced', function () {
+    $id = (int) ($_GET['post'] ?? 0);
+    if (!$id || !current_user_can('edit_post', $id)) wp_die('Geen toegang.');
+    check_admin_referer('hyd_mark_synced_' . $id);
+    hyd_mark_synced($id);
+    wp_safe_redirect(get_edit_post_link($id, 'url'));
+    exit;
+});
 
 add_action('save_post', function ($post_id) {
     if (!isset($_POST['hyd_lang_nonce']) || !wp_verify_nonce($_POST['hyd_lang_nonce'], 'hyd_lang_save')) return;
@@ -90,6 +145,7 @@ add_action('admin_post_hyd_translate', function () {
 
     update_post_meta($new, '_hyd_lang', $lang);
     update_post_meta($new, '_hyd_group', $group);
+    hyd_mark_synced($new);
     update_post_meta($id, '_hyd_group', $group);
     if ($thumb = get_post_thumbnail_id($id)) set_post_thumbnail($new, $thumb);
 
@@ -112,7 +168,14 @@ foreach (hyd_translatable_types() as $hyd_type) {
         $lang = hyd_post_lang($post_id);
         echo '<strong>' . esc_html(strtoupper($lang)) . '</strong>';
         $other = $lang === 'nl' ? 'en' : 'nl';
-        if (hyd_translation($post_id, $other)) echo ' <span title="Vertaling aanwezig" style="color:#2E7A1F">✓ ' . esc_html(strtoupper($other)) . '</span>';
+        $tid   = hyd_translation($post_id, $other);
+        if (!$tid) return;
+        $outdated = $lang === 'nl' ? hyd_translation_outdated($tid) : hyd_translation_outdated($post_id);
+        if ($outdated) {
+            echo ' <span title="Vertaling loopt achter op het Nederlandse origineel" style="color:#b26200">⚠ ' . esc_html(strtoupper($lang === 'nl' ? $other : $lang)) . ' verouderd</span>';
+        } else {
+            echo ' <span title="Vertaling aanwezig" style="color:#2E7A1F">✓ ' . esc_html(strtoupper($other)) . '</span>';
+        }
     }, 10, 2);
 }
 
@@ -134,3 +197,32 @@ add_action('pre_get_posts', function ($q) {
     $mq[] = hyd_lang_meta_query($lang);
     $q->set('meta_query', $mq);
 });
+
+/* -------------------------------------------------------------------------
+ * Engelse alt-tekst in de mediabibliotheek
+ * Afbeeldingen worden door beide talen gedeeld; op hydynamic.com wordt deze
+ * alt-tekst gebruikt (leeg = de Nederlandse alt-tekst).
+ * ---------------------------------------------------------------------- */
+
+add_filter('attachment_fields_to_edit', function ($fields, $post) {
+    if (!wp_attachment_is_image($post->ID)) return $fields;
+    $fields['hyd_alt_en'] = [
+        'label' => 'Alt-tekst (Engels)',
+        'input' => 'text',
+        'value' => get_post_meta($post->ID, '_hyd_alt_en', true),
+        'helps' => 'Voor hydynamic.com. Leeg laten = de Nederlandse alt-tekst wordt gebruikt.',
+    ];
+    return $fields;
+}, 10, 2);
+
+add_filter('attachment_fields_to_save', function ($post, $attachment) {
+    if (isset($attachment['hyd_alt_en'])) {
+        $alt = sanitize_text_field($attachment['hyd_alt_en']);
+        if ($alt === '') {
+            delete_post_meta($post['ID'], '_hyd_alt_en');
+        } else {
+            update_post_meta($post['ID'], '_hyd_alt_en', $alt);
+        }
+    }
+    return $post;
+}, 10, 2);
